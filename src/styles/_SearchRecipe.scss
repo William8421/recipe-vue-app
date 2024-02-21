@@ -1,0 +1,38 @@
+.search-recipe-container {
+  form {
+  }
+  .filters-modal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    .check-box {
+      width: fit-content;
+      padding: 0.2rem;
+      border-radius: 1rem;
+      background-color: rgb(241, 235, 235);
+      display: flex;
+      align-items: center;
+      input {
+        appearance: none;
+        -webkit-appearance: none;
+        outline: none;
+        border: none;
+        width: 1em;
+        height: 1em;
+        border-radius: 50%;
+        background-color: white;
+        cursor: pointer;
+        position: relative;
+      }
+      input:checked::before {
+        content: "✔"; /* Unicode checkmark character */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: green;
+      }
+    }
+  }
+}

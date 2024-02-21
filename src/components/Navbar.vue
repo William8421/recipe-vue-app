@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="navbar-container">
     <div class="burger-icon" @click="toggleMenu">
       <div class="bar"></div>
       <div class="bar"></div>
