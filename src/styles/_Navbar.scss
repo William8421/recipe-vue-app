@@ -1,31 +1,47 @@
 .navbar-container {
+  .burger-icon-container {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: 4rem;
+    background-color: #88ab8e6d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+  }
+
   .burger-icon {
     display: block;
     position: fixed;
-    top: 1rem;
-    left: 1rem;
-    z-index: 1001; /* Above the navigation menu */
+    top: 0.3rem;
+    left: 0.5rem;
+    z-index: 1001;
   }
 
   .bar {
-    width: 30px;
-    height: 3px;
+    opacity: 1;
+    width: 50px;
+    height: 7px;
+    border-radius: 6px;
     background-color: #333;
-    margin: 6px 0;
+    margin: 10px 0;
     transition: 0.4s;
   }
   nav {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5rem;
-    background-color: #f8f9fa;
+    div {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5rem;
+      padding-top: 2rem;
+    }
     padding: 5rem 0 5rem 1rem;
+    background-color: #f2f1eb;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     transform: translateY(-100%);
     transition: transform 0.3s ease-in-out;
@@ -33,9 +49,12 @@
     overflow: auto;
 
     .router-link {
-      color: red;
+      color: #88ab8e;
       text-decoration: none;
       font-size: 1.5rem;
+    }
+    .app-name {
+      display: none;
     }
   }
 

@@ -2,12 +2,10 @@
   <div class="recipes">
     <h2>Recipes</h2>
     <div class="card" v-for="recipe in recipes" :key="recipe.recipe.uri">
-      <div class="img-container">
-        <img :src="recipe.recipe.image" :alt="recipe.recipe.label" />
-      </div>
-      <div class="title-health-labels">
+      <div>
         <h3>{{ recipe.recipe.label }}</h3>
-        <div class="health-labels">
+        <img :src="recipe.recipe.image" :alt="recipe.recipe.label" />
+        <div>
           <div
             v-for="healthLabel in recipe.recipe.healthLabels"
             :key="healthLabel"

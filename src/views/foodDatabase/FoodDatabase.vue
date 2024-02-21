@@ -4,7 +4,6 @@
     <form @submit.prevent="searchFood">
       <label for="foodQuery">Food:</label>
       <input v-model="foodQuery" id="foodQuery" type="text" required />
-
       <button type="submit">Search Food</button>
     </form>
 
@@ -29,7 +28,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { FoodData } from "../../types/Type";
+import { FoodData } from "../../types/Types";
 
 export default defineComponent({
   data() {
@@ -39,22 +38,19 @@ export default defineComponent({
     };
   },
   methods: {
-    searchFood() {
-      const apiId = process.env.VUE_APP_FOOD_DATABASE_API_ID;
-      const apiKey = process.env.VUE_APP_FOOD_DATABASE_API_KEY;
+    async searchFood() {
+      try {
+        const apiId = process.env.VUE_APP_FOOD_DATABASE_API_ID;
+        const apiKey = process.env.VUE_APP_FOOD_DATABASE_API_KEY;
+        const apiUrl = `https://api.edamam.com/api/food-database/v2/parser?app_key=${apiKey}&app_id=${apiId}&ingr=${encodeURIComponent(
+          this.foodQuery
+        )}`;
 
-      const apiUrl = `https://api.edamam.com/api/food-database/v2/parser?app_key=${apiKey}&app_id=${apiId}&ingr=${encodeURIComponent(
-        this.foodQuery
-      )}`;
-
-      axios
-        .get(apiUrl)
-        .then((response) => {
-          this.foodData = response.data.hints;
-        })
-        .catch((error) => {
-          console.error("Error searching food:", error);
-        });
+        const response = await axios.get(apiUrl);
+        this.foodData = response.data.hints;
+      } catch (error) {
+        console.error("Error searching food:", error);
+      }
     },
   },
   // local storage

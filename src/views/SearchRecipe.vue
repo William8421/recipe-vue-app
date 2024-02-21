@@ -1,7 +1,6 @@
 <template>
   <div class="search-recipe-container">
     <h1>Recipe Search</h1>
-    <!-- search form -->
     <form @submit.prevent="searchRecipes">
       <div>
         <label for="searchQuery">Keywords</label>
@@ -12,68 +11,29 @@
         <button type="button" @click="openCloseAllergiesModal">
           Allergies
         </button>
-        <!-- <label for="calories">Calories</label> -->
         <input
-          v-model="Calories"
+          v-model="calories"
           id="calories"
           type="number"
           placeholder="calories"
         />
       </div>
-
-      <button type="submit">Search Recipes</button>
+      <button class="submit-button" type="submit">Search Recipes</button>
     </form>
 
-    <!-- Diet Modal using Modal component -->
     <Modal :show="showDietModal" :closeModal="openCloseDietModal">
       <h2>Diets:</h2>
-      <div class="filters-modal">
-        <div v-for="dietOption in dietOptions" :key="dietOption">
-          <div class="check-box">
-            <input
-              type="checkbox"
-              :id="dietOption"
-              :value="dietOption"
-              v-model="selectedDiets"
-            />
-            <label :for="dietOption">{{ dietOption }}</label>
-          </div>
-        </div>
-      </div>
+      <FilterOptions :options="dietOptions" v-model="selectedDiets" />
     </Modal>
 
-    <!-- Allergies Modal using Modal component -->
     <Modal :show="showAllergiesModal" :closeModal="openCloseAllergiesModal">
       <h2>Allergies:</h2>
-      <div class="filters-modal">
-        <div v-for="allergy in allergies" :key="allergy">
-          <div class="check-box">
-            <input
-              type="checkbox"
-              :id="allergy"
-              :value="allergy"
-              v-model="selectedAllergies"
-            />
-            <label :for="allergy">{{ allergy }}</label>
-          </div>
-        </div>
-      </div>
+      <FilterOptions :options="allergies" v-model="selectedAllergies" />
     </Modal>
 
-    <div v-if="selectedDiets.length != 0">
-      <h4>Diets:</h4>
-      <div v-for="diet in selectedDiets" :key="diet">
-        <li>{{ diet }}</li>
-      </div>
-    </div>
-    <div v-if="selectedAllergies.length != 0">
-      <h4>Allergies:</h4>
-      <div v-for="allergy in selectedAllergies" :key="allergy">
-        <li>{{ allergy }}</li>
-      </div>
-    </div>
+    <FilterDisplay title="Diets" :items="selectedDiets" />
+    <FilterDisplay title="Allergies" :items="selectedAllergies" />
 
-    <!-- recipe -->
     <div v-if="recipes">
       <Recipes :recipes="recipes" />
     </div>
@@ -82,15 +42,19 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Recipe } from "../types/Type";
+import { Recipe } from "../types/Types";
 import axios from "axios";
 import Modal from "../components/searchRecipe/Modal.vue";
 import Recipes from "../components/searchRecipe/Recipe.vue";
+import FilterOptions from "../components/searchRecipe/FilterOptions.vue";
+import FilterDisplay from "../components/searchRecipe/FilterDisplay.vue";
 
 export default defineComponent({
   components: {
     Modal,
     Recipes,
+    FilterOptions,
+    FilterDisplay,
   },
   data() {
     return {
@@ -140,54 +104,29 @@ export default defineComponent({
     };
   },
   methods: {
-    searchRecipes() {
-      const appId = process.env.VUE_APP_SEARCH_API_ID;
-      const appKey = process.env.VUE_APP_SEARCH_API_KEY;
+    async searchRecipes() {
+      try {
+        const appId = process.env.VUE_APP_SEARCH_API_ID;
+        const appKey = process.env.VUE_APP_SEARCH_API_KEY;
 
-      let apiUrl = `https://api.edamam.com/search?app_id=${appId}&app_key=${appKey}&q=${this.searchQuery}`;
+        let apiUrl = `https://api.edamam.com/search?app_id=${appId}&app_key=${appKey}&q=${this.searchQuery}`;
 
-      const dietTerms = [
-        "balanced",
-        "high-fiber",
-        "high-protein",
-        "low-carb",
-        "low-fat",
-        "low-sodium",
-      ];
+        if (this.selectedDiets.length > 0) {
+          apiUrl += `&health=${this.selectedDiets.join("&")}`;
+        }
 
-      // Separate selectedDiets into diet and health terms
-      const selectedDietTerms = this.selectedDiets.filter((diet) =>
-        dietTerms.includes(diet)
-      );
-      const selectedHealthTerms = this.selectedDiets.filter(
-        (diet) => !dietTerms.includes(diet)
-      );
+        if (this.selectedAllergies.length > 0) {
+          apiUrl += `&health=${this.selectedAllergies.join("&")}`;
+        }
+        if (this.calories) {
+          apiUrl += `&calories=${this.calories}`;
+        }
 
-      // Generate URL based on the presence of diet terms
-      if (selectedDietTerms.length > 0) {
-        apiUrl += `&diet=${selectedDietTerms.join("&diet=")}`;
+        const response = await axios.get(apiUrl);
+        this.recipes = response.data.hits;
+      } catch (error) {
+        console.error("Error searching recipes:", error);
       }
-
-      // Include health terms
-      if (selectedHealthTerms.length > 0) {
-        apiUrl += `&health=${selectedHealthTerms.join("&health=")}`;
-      }
-
-      if (this.selectedAllergies.length > 0) {
-        apiUrl += `&health=${this.selectedAllergies.join("&")}`;
-      }
-      if (this.calories) {
-        apiUrl += `&calories=${this.calories}`;
-      }
-
-      axios
-        .get(apiUrl)
-        .then((response) => {
-          this.recipes = response.data.hits;
-        })
-        .catch((error) => {
-          console.error("Error searching recipes:", error);
-        });
     },
 
     openCloseDietModal() {

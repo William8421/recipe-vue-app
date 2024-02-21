@@ -1,5 +1,5 @@
 <template>
-  <p>
+  <div class="values">
     <!-- label -->
     <span>
       <strong>
@@ -11,21 +11,21 @@
     </span>
     <!-- total daily -->
     <span>
-      {{ Math.round(totalQuantity) }}
-      {{ totalUnit }}
+      <strong> {{ Math.round(totalQuantity) }}{{ totalUnit }} </strong>
     </span>
-  </p>
+  </div>
 </template>
 
-<script>
+<script lang="ts">
+import { NutritionData } from "../../types/Types";
 export default {
-  props: [
-    "label",
-    "quantity",
-    "unit",
-    "totalQuantity",
-    "totalUnit",
-    "nutritionData",
-  ],
+  props: {
+    label: String,
+    quantity: Number,
+    unit: String,
+    totalQuantity: Number,
+    totalUnit: String,
+    nutritionData: Object as () => NutritionData | null,
+  },
 };
 </script>

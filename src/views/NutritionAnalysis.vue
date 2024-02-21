@@ -1,64 +1,74 @@
 <template>
-  <div class="nutrition-analysis-container">
-    <!-- form block -->
-    <div class="search-block">
-      <h1>Nutrition Analysis</h1>
-      <form @submit.prevent="analyzeNutrition">
-        <label for="ingredients">Ingredients</label>
-        <textarea
-          v-model="foodDescription"
-          id="ingredients"
-          cols="40"
-          rows="15"
-          required
-        ></textarea>
-        <button type="submit">Analyze Nutrition</button>
-      </form>
-    </div>
+  <div class="nutrition-analysis">
+    <h1>Nutrition Analysis</h1>
+    <div class="nutrition-analysis-container">
+      <div>
+        <div class="search-block">
+          <form @submit.prevent="analyzeNutrition">
+            <div>
+              <h3>Recipe</h3>
+              <textarea
+                v-model="foodDescription"
+                id="ingredients"
+                cols="70"
+                rows="15"
+                required
+              >
+              </textarea>
+            </div>
+            <button class="submit-button" type="submit">
+              Analyze Nutrition
+            </button>
+          </form>
+        </div>
 
-    <!-- table -->
-    <NutritionTable :nutritionData="nutritionData" />
+        <NutritionTable v-if="nutritionData" :nutritionData="nutritionData" />
+      </div>
 
-    <!-- information -->
-    <div v-if="nutritionData" class="information">
-      <h3>Nutrition Information</h3>
-      <p><strong>Amount per serving</strong> <strong>% Daily Value</strong></p>
-      <p>
-        <span> <strong> Calories: </strong> </span
-        ><span>{{ nutritionData.calories }}</span>
-      </p>
+      <div v-if="nutritionData" class="information">
+        <h2>Nutrition Information</h2>
+        <h3>Amount per serving</h3>
+        <div class="information-header">
+          <h3>Calories:</h3>
+          <h3>{{ nutritionData.calories }}</h3>
+        </div>
 
-      <NutritionInformation
-        v-for="(nutrient, key) in nutritionInformation"
-        :key="key"
-        :label="nutrient.label"
-        :quantity="nutrient.quantity"
-        :unit="nutrient.unit"
-        :totalQuantity="nutrient.totalQuantity"
-        :totalUnit="nutrient.totalUnit"
-        :nutritionData="nutritionData"
-      />
+        <NutritionInformation
+          v-for="(nutrient, key) in nutritionInformation"
+          :key="key"
+          :label="nutrient.label"
+          :quantity="nutrient.quantity"
+          :unit="nutrient.unit"
+          :totalQuantity="nutrient.totalQuantity"
+          :totalUnit="nutrient.totalUnit"
+          :nutritionData="nutritionData"
+        />
+        <p>*Percent Daily Values are based on a 2000 calorie diet</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import axios from "axios";
-import { NutritionData, NutritionMethods } from "../types/Type";
+import {
+  NutritionData,
+  NutritionMethods,
+  NutrientInformation,
+} from "../types/Types";
 import NutritionInformation from "../components/nutritionAnalysis/NutritionInformation.vue";
 import NutritionTable from "../components/nutritionAnalysis/NutritionTable.vue";
+
 export default {
   components: { NutritionTable, NutritionInformation },
   data() {
     return {
       foodDescription: "",
       nutritionData: null as NutritionData | null,
-      ingredientsDetails: [] as NutritionData[],
-      ingredientsCalories: [] as number[],
     };
   },
   computed: {
-    nutritionInformation(this: NutritionMethods) {
+    nutritionInformation(this: NutritionMethods): NutrientInformation[] {
       if (!this.nutritionData) return [];
 
       const selectedNutrientKeys = [
@@ -83,38 +93,23 @@ export default {
     },
   },
   methods: {
-    analyzeNutrition(this: NutritionMethods) {
-      const appId = process.env.VUE_APP_NUTRITION_API_ID;
-      const appKey = process.env.VUE_APP_NUTRITION_API_KEY;
+    async analyzeNutrition(this: NutritionMethods) {
+      try {
+        const appId = process.env.VUE_APP_NUTRITION_API_ID;
+        const appKey = process.env.VUE_APP_NUTRITION_API_KEY;
+        const apiUrl = `https://api.edamam.com/api/nutrition-details?app_id=${appId}&app_key=${appKey}`;
 
-      const apiUrl = `https://api.edamam.com/api/nutrition-details?app_id=${appId}&app_key=${appKey}`;
-
-      const ingredientsArray: string[] = this.foodDescription.split("\n");
-      const filteredIngredients = ingredientsArray.filter(
-        (ingredient: string) => ingredient.trim() !== ""
-      );
-      const requestData = {
-        ingr: filteredIngredients,
-      };
-
-      axios
-        .post(apiUrl, requestData)
-        .then((response) => {
-          this.nutritionData = response.data;
-
-          this.ingredientsDetails = this.nutritionData.ingredients.map(
-            (item) => item.parsed[0]
-          );
-          this.ingredientsCalories = this.ingredientsDetails.map(
-            (item: any) => item.nutrients.ENERC_KCAL.quantity
-          );
-        })
-        .catch((error) => {
-          console.error("Error analyzing nutrition:", error);
-        });
+        const ingredientsArray: string[] = this.foodDescription
+          .split("\n")
+          .filter((ingredient: string) => ingredient.trim() !== "");
+        const requestData = { ingr: ingredientsArray };
+        const response = await axios.post(apiUrl, requestData);
+        this.nutritionData = response.data;
+      } catch (error) {
+        console.error("Error analyzing nutrition:", error);
+      }
     },
   },
-  // local storage
   beforeRouteLeave(to, from, next) {
     localStorage.setItem("nutritionData", JSON.stringify(this.nutritionData));
     next();

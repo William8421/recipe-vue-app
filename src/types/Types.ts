@@ -41,8 +41,15 @@ export interface NutritionMethods {
   totalDaily: TotalDaily;
   totalNutrients: TotalNutrients;
 }
-// searchRecipe
+export interface NutrientInformation {
+  label: string;
+  quantity: number;
+  unit: string;
+  totalQuantity: number;
+  totalUnit: string;
+}
 
+// searchRecipe
 export interface Recipe {
   calories: number;
   digest: Nutrient[];

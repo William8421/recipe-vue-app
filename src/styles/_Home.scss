@@ -1,0 +1,14 @@
+.home {
+  background: url("../assets/images/recipe-home-background.jpg") left/cover
+    no-repeat;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  color: black;
+  .app-title {
+    padding-top: 10rem;
+  }
+}

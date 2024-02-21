@@ -1,0 +1,65 @@
+.nutrition-analysis {
+  padding-bottom: 4rem;
+  h1 {
+    padding-top: 4rem;
+  }
+  .nutrition-analysis-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    .search-block {
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        textarea {
+          border-radius: 1rem;
+          padding: 1rem;
+          width: 80%;
+        }
+      }
+    }
+    .results {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      table {
+        border: solid 1px #88ab8e;
+        thead {
+          background-color: #88ab8e;
+        }
+        tbody {
+          td {
+            background-color: white;
+            padding: 0 0.5rem;
+          }
+        }
+      }
+    }
+
+    .information {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background-color: white;
+      width: 80%;
+      border-radius: 1rem;
+      .information-header {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+      }
+      .values {
+        padding: 0 1rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+      }
+      p {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}

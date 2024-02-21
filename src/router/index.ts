@@ -33,9 +33,10 @@ const routes: Array<RouteRecordRaw> = [
     component: FoodDatabase,
   },
   {
-    path: "/food-details",
+    path: "/food-details/:foodId",
     name: "FoodDetails",
     component: FoodDetails,
+    props: true,
   },
 ];
 

@@ -1,0 +1,67 @@
+@media (min-width: 391px) {
+  .nutrition-analysis {
+    .nutrition-analysis-container {
+      .information {
+        width: 50%;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-container {
+    .burger-icon-container {
+      display: none;
+    }
+    .bar {
+      display: none;
+    }
+    nav {
+      transform: translateY(0);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: fit-content;
+      padding: 1rem;
+      background-color: #88ab8e;
+      div {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0;
+        gap: 1rem;
+      }
+      .router-link {
+        font-size: 1rem;
+        text-decoration: underline;
+        color: black;
+      }
+      .app-name {
+        display: block;
+        font-weight: bolder;
+        font-size: 1.4rem;
+        text-decoration: none;
+      }
+    }
+    nav a.router-link-exact-active {
+      color: #eee7da;
+    }
+  }
+  .nutrition-analysis {
+    .nutrition-analysis-container {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .nutrition-analysis {
+    .nutrition-analysis-container {
+      justify-content: space-around;
+      .information {
+        width: 30%;
+      }
+    }
+  }
+}

@@ -25,11 +25,11 @@ export default {
     };
   },
   async mounted() {
-    const foodId = this.$route.params.foodId;
-    const apiId = process.env.VUE_APP_FOOD_DATABASE_API_ID;
-    const apiKey = process.env.VUE_APP_FOOD_DATABASE_API_KEY;
-
     try {
+      const foodId = this.$route.params.foodId;
+      const apiId = process.env.VUE_APP_FOOD_DATABASE_API_ID;
+      const apiKey = process.env.VUE_APP_FOOD_DATABASE_API_KEY;
+
       const response = await axios.get(
         `https://api.edamam.com/api/food-database/v2/parser?app_key=${apiKey}&app_id=${apiId}&ingr=${encodeURIComponent(
           foodId

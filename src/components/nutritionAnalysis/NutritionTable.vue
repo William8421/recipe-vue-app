@@ -1,6 +1,6 @@
 <template>
   <div v-if="nutritionData" class="results">
-    <h3>Ingredients</h3>
+    <h2>Ingredients</h2>
     <table class="result-table">
       <thead>
         <tr>
@@ -25,9 +25,11 @@
 </template>
 
 <script lang="ts">
-import { NutritionMethods } from "../../types/Type";
+import { NutritionData, NutritionMethods } from "../../types/Types";
 export default {
-  props: ["nutritionData"],
+  props: {
+    nutritionData: Object as () => NutritionData | null,
+  },
   computed: {
     calculatedIngredients(this: NutritionMethods) {
       if (!this.nutritionData) return [];
