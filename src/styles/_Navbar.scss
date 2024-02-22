@@ -4,11 +4,14 @@
     position: fixed;
     top: 0;
     height: 4rem;
-    background-color: #88ab8e6d;
+    background-color: #88ab8e;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1001;
+    h1 {
+      color: black;
+    }
   }
 
   .burger-icon {

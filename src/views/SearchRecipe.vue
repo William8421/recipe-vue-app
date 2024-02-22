@@ -1,25 +1,56 @@
 <template>
   <div class="search-recipe-container">
     <h1>Recipe Search</h1>
-    <form @submit.prevent="searchRecipes">
-      <div>
-        <label for="searchQuery">Keywords</label>
-        <input v-model="searchQuery" id="searchQuery" type="text" required />
-      </div>
-      <div>
-        <button type="button" @click="openCloseDietModal">Diets</button>
-        <button type="button" @click="openCloseAllergiesModal">
-          Allergies
-        </button>
-        <input
-          v-model="calories"
-          id="calories"
-          type="number"
-          placeholder="calories"
-        />
-      </div>
-      <button class="submit-button" type="submit">Search Recipes</button>
-    </form>
+    <div class="search-recipe-block">
+      <form @submit.prevent="searchRecipes">
+        <div class="keywords">
+          <label class="keywords-label" for="searchQuery"
+            >Enter a what you have eaten, like "coffee and croissant" or
+            "chicken enchilada" to see how it works. We have accurate data tens
+            of thousands of foods, including international dishes.</label
+          >
+          <div class="input-button">
+            <input
+              v-model="searchQuery"
+              id="searchQuery"
+              type="search"
+              placeholder="Keywords"
+              required
+            />
+            <button class="search-icon" type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </div>
+        <div class="filter-buttons-container">
+          <button
+            class="filter-button"
+            type="button"
+            @click="openCloseDietModal"
+          >
+            Diets
+          </button>
+          <input
+            v-model="calories"
+            id="calories"
+            type="number"
+            placeholder="calories"
+          />
+          <button
+            class="filter-button"
+            type="button"
+            @click="openCloseAllergiesModal"
+          >
+            Allergies
+          </button>
+        </div>
+        <div>
+          <FilterDisplay title="Diets" :items="selectedDiets" />
+          <FilterDisplay title="Allergies" :items="selectedAllergies" />
+        </div>
+        <button class="custom-button" type="submit">Search Recipes</button>
+      </form>
+    </div>
 
     <Modal :show="showDietModal" :closeModal="openCloseDietModal">
       <h2>Diets:</h2>
@@ -30,9 +61,6 @@
       <h2>Allergies:</h2>
       <FilterOptions :options="allergies" v-model="selectedAllergies" />
     </Modal>
-
-    <FilterDisplay title="Diets" :items="selectedDiets" />
-    <FilterDisplay title="Allergies" :items="selectedAllergies" />
 
     <div v-if="recipes">
       <Recipes :recipes="recipes" />
@@ -104,29 +132,54 @@ export default defineComponent({
     };
   },
   methods: {
-    async searchRecipes() {
-      try {
-        const appId = process.env.VUE_APP_SEARCH_API_ID;
-        const appKey = process.env.VUE_APP_SEARCH_API_KEY;
+    searchRecipes() {
+      const appId = process.env.VUE_APP_SEARCH_API_ID;
+      const appKey = process.env.VUE_APP_SEARCH_API_KEY;
 
-        let apiUrl = `https://api.edamam.com/search?app_id=${appId}&app_key=${appKey}&q=${this.searchQuery}`;
+      let apiUrl = `https://api.edamam.com/search?app_id=${appId}&app_key=${appKey}&q=${this.searchQuery}`;
 
-        if (this.selectedDiets.length > 0) {
-          apiUrl += `&health=${this.selectedDiets.join("&")}`;
-        }
+      const dietTerms = [
+        "balanced",
+        "high-fiber",
+        "high-protein",
+        "low-carb",
+        "low-fat",
+        "low-sodium",
+      ];
 
-        if (this.selectedAllergies.length > 0) {
-          apiUrl += `&health=${this.selectedAllergies.join("&")}`;
-        }
-        if (this.calories) {
-          apiUrl += `&calories=${this.calories}`;
-        }
+      // Separate selectedDiets into diet and health terms
+      const selectedDietTerms = this.selectedDiets.filter((diet) =>
+        dietTerms.includes(diet)
+      );
+      const selectedHealthTerms = this.selectedDiets.filter(
+        (diet) => !dietTerms.includes(diet)
+      );
 
-        const response = await axios.get(apiUrl);
-        this.recipes = response.data.hits;
-      } catch (error) {
-        console.error("Error searching recipes:", error);
+      // Generate URL based on the presence of diet terms
+      if (selectedDietTerms.length > 0) {
+        apiUrl += `&diet=${selectedDietTerms.join("&diet=")}`;
       }
+
+      // Include health terms
+      if (selectedHealthTerms.length > 0) {
+        apiUrl += `&health=${selectedHealthTerms.join("&health=")}`;
+      }
+
+      if (this.selectedAllergies.length > 0) {
+        apiUrl += `&health=${this.selectedAllergies.join("&")}`;
+      }
+      if (this.calories) {
+        apiUrl += `&calories=${this.calories}`;
+      }
+
+      axios
+        .get(apiUrl)
+        .then((response) => {
+          this.recipes = response.data.hits;
+        })
+        .catch((error) => {
+          console.error("Error searching recipes:", error);
+        });
     },
 
     openCloseDietModal() {

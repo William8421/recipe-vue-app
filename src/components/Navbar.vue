@@ -14,7 +14,7 @@
 
     <nav :class="{ 'menu-open': isMenuOpen }">
       <div class="app-name">Recipe App</div>
-      <div>
+      <div class="router-container">
         <router-link to="/" @click="closeMenu" class="router-link">
           <i class="fa-solid fa-house"></i> Home</router-link
         >

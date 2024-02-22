@@ -6,6 +6,24 @@
       }
     }
   }
+  .search-recipe-container {
+    .search-recipe-block {
+      form {
+        gap: 1rem;
+        .keywords {
+          padding: 0;
+          .input-button {
+            width: 80%;
+          }
+        }
+      }
+    }
+    .modal {
+      button {
+        margin-bottom: 2rem;
+      }
+    }
+  }
 }
 
 @media (min-width: 768px) {
@@ -53,9 +71,39 @@
       align-items: flex-start;
     }
   }
+  .search-recipe-container {
+    padding-bottom: 0;
+    .search-recipe-block {
+      form {
+        .keywords {
+          flex-direction: column;
+          .keywords-label {
+            padding: 0 5rem;
+            display: block;
+            padding-bottom: 1rem;
+          }
+        }
+      }
+    }
+    .recipes {
+      .card {
+        h2 {
+          text-align: left;
+          padding-left: 0.5rem;
+        }
+      }
+    }
+  }
 }
 
 @media (min-width: 992px) {
+  .navbar-container {
+    nav {
+      .router-container {
+        gap: 3rem;
+      }
+    }
+  }
   .nutrition-analysis {
     .nutrition-analysis-container {
       justify-content: space-around;

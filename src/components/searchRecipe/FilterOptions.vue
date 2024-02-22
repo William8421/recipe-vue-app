@@ -15,21 +15,33 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent, PropType } from "vue";
+
+interface FilterOptionsProps {
+  options: string[];
+  modelValue: string[];
+}
+
+export default defineComponent({
   props: {
-    options: Array as () => string[],
-    modelValue: Array as () => string[],
+    options: {
+      type: Array as PropType<FilterOptionsProps["options"]>,
+      required: true,
+    },
+    modelValue: {
+      type: Array as PropType<FilterOptionsProps["modelValue"]>,
+      required: true,
+    },
   },
-  emits: ["update:modelValue"],
   computed: {
     selectedOptions: {
-      get() {
+      get(): string[] {
         return this.modelValue;
       },
-      set(value: any) {
+      set(value: string[]) {
         this.$emit("update:modelValue", value);
       },
     },
   },
-};
+});
 </script>

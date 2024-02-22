@@ -1,8 +1,10 @@
 <template>
   <div v-if="items.length !== 0">
-    <h4>{{ title }}:</h4>
-    <div v-for="item in items" :key="item">
-      <li>{{ item }}</li>
+    <h3>{{ title }}:</h3>
+    <div class="selected-filters">
+      <ul v-for="item in items" :key="item">
+        <li>{{ item }}</li>
+      </ul>
     </div>
   </div>
 </template>

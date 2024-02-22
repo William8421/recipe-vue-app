@@ -25,8 +25,9 @@ interface TotalNutrients {
 
 // nutritionAnalysis
 export interface NutritionData {
-  yield: number;
   calories: number;
+  yield: number;
+  totalWeight: number;
   ingredients: Ingredient[];
   totalDaily: TotalDaily;
   totalNutrients: TotalNutrients;
@@ -40,6 +41,7 @@ export interface NutritionMethods {
   ingredientsCalories: Array<number>;
   totalDaily: TotalDaily;
   totalNutrients: TotalNutrients;
+  modelValue: string[];
 }
 export interface NutrientInformation {
   label: string;
