@@ -2,24 +2,44 @@
   <div class="food-database-container">
     <h2>Food Database Search</h2>
     <form @submit.prevent="searchFood">
-      <label for="foodQuery">Food:</label>
-      <input v-model="foodQuery" id="foodQuery" type="text" required />
-      <button type="submit">Search Food</button>
+      <input
+        v-model="foodQuery"
+        id="foodQuery"
+        type="text"
+        placeholder="Food"
+        required
+      />
+      <button class="custom-button" type="submit">Search</button>
     </form>
 
-    <div v-if="foodData" class="food-information">
+    <div v-if="foodData" class="food-results-container">
       <h3>Food Information</h3>
-      <div v-for="(data, index) in foodData" :key="index" class="food-card">
-        <router-link
-          :to="{ name: 'FoodDetails', params: { foodId: data.food.foodId } }"
+      <div class="food-results">
+        <div
+          v-for="(data, index) in foodData"
+          :key="index"
+          class="food-card"
+          @click="navigateToFoodDetails(data.food.foodId)"
         >
           <h3>{{ data.food.label }}</h3>
-        </router-link>
-        <div v-if="data.food.image" class="food-image-container">
-          <img :src="data.food.image" :alt="data.food.label" />
+          <div class="food-card-body">
+            <!-- <div v-if="data.food.image" class="food-image-container">
+              <img :src="data.food.image" :alt="data.food.label" />
+            </div>
+            <div v-else class="food-image-container">
+              <div class="empty-image"></div>
+            </div> -->
+            <div class="card-information">
+              <div>
+                <strong>Calories:</strong>
+                <span>{{ Math.round(data.food.nutrients.ENERC_KCAL) }}</span>
+              </div>
+              <div class="brand">
+                <span>{{ data.food.brand }}</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <p>Calories: {{ data.food.nutrients.ENERC_KCAL }}</p>
-        <p>{{ data.food.brand }}</p>
       </div>
     </div>
   </div>
@@ -48,15 +68,15 @@ export default defineComponent({
 
         const response = await axios.get(apiUrl);
         this.foodData = response.data.hints;
+        console.log(this.foodData);
+        localStorage.setItem("foodData", JSON.stringify(this.foodData));
       } catch (error) {
         console.error("Error searching food:", error);
       }
     },
-  },
-  // local storage
-  beforeRouteLeave(to, from, next) {
-    localStorage.setItem("foodData", JSON.stringify(this.foodData));
-    next();
+    navigateToFoodDetails(foodId: string) {
+      this.$router.push({ name: "FoodDetails", params: { foodId: foodId } });
+    },
   },
   created() {
     const storedData = localStorage.getItem("foodData");

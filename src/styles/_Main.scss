@@ -3,20 +3,32 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
 }
 body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  background-color: #f2f1eb;
+  background-color: $LIGHT_GRAYISH;
 }
 
 .custom-button {
   padding: 0.5rem;
-  background-color: #88ab8e;
-  color: white;
+  background-color: $DARK_GREEN;
+  color: $MY_LIGHT_COLOR;
   border: none;
   border-radius: 0.5rem;
   font-size: 1rem;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+.app-name {
+  font-family: "Merriweather", serif;
+  color: $MY_DARK_COLOR;
+}
+
+.router-link {
+  font-weight: bold;
 }

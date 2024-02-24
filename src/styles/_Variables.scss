@@ -1,0 +1,24 @@
+$SMALL_SCREEN: 576px;
+$MEDIUM_SCREEN: 768px;
+$LARGE_SCREEN: 992px;
+$EXTRA_LARGE_SCREEN: 1200px;
+
+$DARK_GREEN: #88ab8e;
+$LIGHT_GREEN: #daefd9;
+$BEIGE: #eee7da;
+$LIGHT_GRAYISH: #f2f1eb;
+
+$MY_LIGHT_COLOR: white;
+$MY_DARK_COLOR: rgb(7, 7, 7);
+
+@mixin FLEX_COLUMN_CENTER {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@mixin FLEX_ROW_CENTER {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

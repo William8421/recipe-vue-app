@@ -1,0 +1,36 @@
+.food-details-container {
+  margin-top: 5rem;
+  .details-results {
+    @include FLEX_COLUMN_CENTER;
+    .details-card {
+      background-color: $MY_LIGHT_COLOR;
+      border-radius: 0.5rem;
+      width: 80%;
+      .details-card-body {
+        @include FLEX_COLUMN_CENTER;
+        .details-img-container {
+          img {
+            width: 80%;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+          }
+        }
+        .details-card-information {
+          width: 100%;
+          padding: 0;
+          background-color: $LIGHT_GREEN;
+          div {
+            border-top: solid 1px $DARK_GREEN;
+            padding: 0.5rem 5rem;
+            display: flex;
+            justify-content: space-between;
+          }
+          .brand {
+            border-radius: 0 0 0.5rem 0.5rem;
+            min-height: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+}

@@ -6,7 +6,7 @@
         {{ label }}
       </strong>
       <!-- total Nutrients -->
-      {{ quantity.toFixed(1) }}
+      {{ Math.round(quantity) }}
       {{ unit }}
     </span>
     <!-- total daily -->

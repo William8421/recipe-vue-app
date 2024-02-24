@@ -9,7 +9,7 @@
             "chicken enchilada" to see how it works. We have accurate data tens
             of thousands of foods, including international dishes.</label
           >
-          <div class="input-button">
+          <div class="input-button-container">
             <input
               v-model="searchQuery"
               id="searchQuery"

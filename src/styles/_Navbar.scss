@@ -4,13 +4,11 @@
     position: fixed;
     top: 0;
     height: 4rem;
-    background-color: #88ab8e;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: $DARK_GREEN;
+    @include FLEX_ROW_CENTER;
     z-index: 1001;
     h1 {
-      color: black;
+      color: $MY_DARK_COLOR;
     }
   }
 
@@ -40,7 +38,7 @@
       padding-top: 2rem;
     }
     padding: 5rem 0 5rem 1rem;
-    background-color: #f2f1eb;
+    background-color: $LIGHT_GRAYISH;
     position: fixed;
     top: 0;
     left: 0;
@@ -52,7 +50,7 @@
     overflow: auto;
 
     .router-link {
-      color: #88ab8e;
+      color: $DARK_GREEN;
       text-decoration: none;
       font-size: 1.5rem;
     }

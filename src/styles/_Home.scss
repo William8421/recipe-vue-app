@@ -3,11 +3,7 @@
     no-repeat;
   min-height: 100vh;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  color: black;
+  color: $MY_DARK_COLOR;
   .app-title {
     padding-top: 10rem;
   }

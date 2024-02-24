@@ -2,7 +2,7 @@
   <div class="nutrition-analysis">
     <h1>Nutrition Analysis</h1>
     <div class="nutrition-analysis-container">
-      <div>
+      <div class="search-table-container">
         <div class="search-block">
           <form @submit.prevent="analyzeNutrition">
             <div>
@@ -12,6 +12,8 @@
                 id="ingredients"
                 cols="70"
                 rows="15"
+                placeholder="1 cup rice,
+10 oz chickpeas"
                 required
               >
               </textarea>

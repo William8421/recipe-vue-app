@@ -1,0 +1,52 @@
+.food-database-container {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  form {
+    @include FLEX_COLUMN_CENTER;
+    gap: 1rem;
+    input {
+      width: 80%;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      border: solid 3px $DARK_GREEN;
+    }
+    input:focus {
+      outline: none;
+    }
+  }
+  .food-results {
+    @include FLEX_COLUMN_CENTER;
+    gap: 2rem;
+    .food-card {
+      background-color: $MY_LIGHT_COLOR;
+      border-radius: 0.5rem;
+      width: 80%;
+      h3 {
+        width: 80%;
+        margin: 1rem auto;
+      }
+      .food-card-body {
+        @include FLEX_COLUMN_CENTER;
+        .card-information {
+          width: 100%;
+          padding: 0;
+          div {
+            padding: 0.5rem 0;
+            border-top: solid 1px $MY_LIGHT_COLOR;
+            background-color: $LIGHT_GREEN;
+            span {
+              margin-right: 1rem;
+            }
+          }
+          .brand {
+            border-radius: 0 0 0.5rem 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.details-container {
+  padding-top: 8rem;
+}

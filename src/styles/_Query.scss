@@ -1,4 +1,14 @@
-@media (min-width: 391px) {
+@media (min-width: $SMALL_SCREEN) {
+  /* navbar */
+  .navbar-container {
+    nav {
+      div {
+        gap: 1rem;
+        padding-top: 1rem;
+      }
+    }
+  }
+  /*Nutrition route*/
   .nutrition-analysis {
     .nutrition-analysis-container {
       .information {
@@ -6,14 +16,56 @@
       }
     }
   }
+  /*search recipe route*/
   .search-recipe-container {
     .search-recipe-block {
       form {
         gap: 1rem;
         .keywords {
           padding: 0;
-          .input-button {
+          .input-button-container {
             width: 80%;
+          }
+        }
+      }
+    }
+    .recipes {
+      .cards-container {
+        .recipe-card {
+          h2 {
+            text-align: left;
+            padding-left: 0.5rem;
+          }
+          .recipe-card-body {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            gap: 0.5rem;
+            img {
+              width: 30%;
+              object-fit: cover;
+              border-radius: 0;
+            }
+            .health-labels {
+              width: 60%;
+              font-size: 0.8rem;
+              h2 {
+                margin-top: 0;
+              }
+              .health-labels-body {
+                padding: 0 0.5rem;
+              }
+            }
+          }
+          .recipe-hidden-body {
+            display: flex;
+            justify-content: space-around;
+            .card-ingredients {
+              width: 45%;
+            }
+            .card-nutrients {
+              width: 45%;
+            }
           }
         }
       }
@@ -24,9 +76,65 @@
       }
     }
   }
+  /*food database route*/
+  .food-database-container {
+    form {
+      width: 80%;
+      margin: 0 auto;
+      flex-direction: row;
+    }
+    .food-results-container {
+      .food-results {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-around;
+        .food-card {
+          width: 40%;
+          .food-card-body {
+            flex-direction: row;
+          }
+        }
+      }
+    }
+  }
+  /*food details route*/
+  .food-details-container {
+    .details-results {
+      .details-card {
+        width: 50%;
+        margin-bottom: 3rem;
+        .details-card-body {
+          flex-direction: row;
+          align-items: flex-end;
+          .details-img-container {
+            img {
+              display: block;
+              width: 200px;
+              margin: 0;
+              border-radius: 0;
+            }
+          }
+          .details-card-information {
+            height: 200px;
+            div {
+              padding: 0.5rem;
+              justify-content: flex-start;
+              gap: 1rem;
+            }
+            .brand {
+              border-radius: 0;
+              min-height: 1.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
-@media (min-width: 768px) {
+@media (min-width: $MEDIUM_SCREEN) {
+  /*navbar*/
   .navbar-container {
     .burger-icon-container {
       display: none;
@@ -41,7 +149,7 @@
       align-items: center;
       height: fit-content;
       padding: 1rem;
-      background-color: #88ab8e;
+      background-color: $DARK_GREEN;
       div {
         flex-direction: row;
         justify-content: space-around;
@@ -52,7 +160,7 @@
       .router-link {
         font-size: 1rem;
         text-decoration: underline;
-        color: black;
+        color: $MY_DARK_COLOR;
       }
       .app-name {
         display: block;
@@ -62,17 +170,22 @@
       }
     }
     nav a.router-link-exact-active {
-      color: #eee7da;
+      color: $BEIGE;
     }
   }
+  /*nutrition route*/
   .nutrition-analysis {
+    padding-bottom: 2rem;
     .nutrition-analysis-container {
       flex-direction: row;
       align-items: flex-start;
+      .information {
+        margin-right: 1rem;
+      }
     }
   }
+  /*search recipe route*/
   .search-recipe-container {
-    padding-bottom: 0;
     .search-recipe-block {
       form {
         .keywords {
@@ -85,18 +198,11 @@
         }
       }
     }
-    .recipes {
-      .card {
-        h2 {
-          text-align: left;
-          padding-left: 0.5rem;
-        }
-      }
-    }
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: $LARGE_SCREEN) {
+  /*navbar*/
   .navbar-container {
     nav {
       .router-container {
@@ -104,11 +210,85 @@
       }
     }
   }
+  /*nutrition route*/
   .nutrition-analysis {
     .nutrition-analysis-container {
       justify-content: space-around;
       .information {
         width: 30%;
+      }
+    }
+  }
+  /*search recipe route*/
+  .search-recipe-container {
+    .recipes {
+      .cards-container {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        .recipe-card {
+          width: 40%;
+          @include FLEX_COLUMN_CENTER;
+          h3 {
+            min-height: 3rem;
+          }
+          .recipe-card-body {
+            @include FLEX_COLUMN_CENTER;
+            img {
+              width: 80%;
+              border-radius: 1rem;
+            }
+            .health-labels {
+              width: 80%;
+              max-height: 200px;
+              overflow: auto;
+              font-size: 1rem;
+            }
+          }
+          .recipe-hidden-body {
+            flex-direction: column;
+            width: 80%;
+            .card-ingredients {
+              width: 100%;
+            }
+            .card-nutrients {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $EXTRA_LARGE_SCREEN) {
+  /*nutrition route*/
+  .nutrition-analysis {
+    .nutrition-analysis-container {
+      justify-content: space-around;
+      .information {
+        max-width: 20rem;
+      }
+    }
+  }
+  /*search recipe route*/
+  .search-recipe-container {
+    .recipes {
+      .cards-container {
+        .recipe-card {
+          width: 30%;
+        }
+      }
+    }
+  }
+  /*food database route*/
+  .food-database-container {
+    .food-results-container {
+      .food-results {
+        .food-card {
+          width: 30%;
+        }
       }
     }
   }

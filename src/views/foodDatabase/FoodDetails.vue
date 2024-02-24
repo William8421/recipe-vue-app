@@ -1,16 +1,35 @@
 <template>
   <div class="food-details-container">
-    <h1>Details</h1>
-    <div v-if="foodData" class="food-details-card">
-      <div v-if="foodData.image" class="food-details-image-container">
-        <img :src="foodData.image" :alt="foodData.knownAs" />
+    <div v-if="foodData" class="details-results">
+      <div class="details-card">
+        <h1>{{ foodData.knownAs }}</h1>
+        <div class="details-card-body">
+          <div v-if="foodData.image" class="details-img-container">
+            <img :src="foodData.image" :alt="foodData.knownAs" />
+          </div>
+          <div class="details-card-information">
+            <div>
+              <strong>Calories:</strong>
+              <span>{{ Math.round(foodData.nutrients.ENERC_KCAL) }}</span>
+            </div>
+            <div>
+              <strong>Fat:</strong>
+              <span>{{ Math.round(foodData.nutrients.FAT) }} g</span>
+            </div>
+            <div>
+              <strong>Carbs:</strong>
+              <span>{{ Math.round(foodData.nutrients.CHOCDF) }} g</span>
+            </div>
+            <div>
+              <strong>Protein:</strong>
+              <span>{{ Math.round(foodData.nutrients.PROCNT) }} g</span>
+            </div>
+            <div class="brand">
+              <span>{{ foodData.brand }}</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <p><strong>Known As:</strong> {{ foodData.knownAs }}</p>
-      <p><strong>Calories:</strong> {{ foodData.nutrients.ENERC_KCAL }}</p>
-      <p><strong>Fat:</strong> {{ foodData.nutrients.FAT }} g</p>
-      <p><strong>Carbs:</strong> {{ foodData.nutrients.CHOCDF }} g</p>
-      <p><strong>Protein:</strong> {{ foodData.nutrients.PROCNT }} g</p>
-      <p v-if="foodData.brand"><strong>Brand:</strong> {{ foodData.brand }}</p>
     </div>
   </div>
 </template>
@@ -37,6 +56,7 @@ export default {
       );
 
       this.foodData = response.data.hints[0].food;
+      console.log(this.foodData);
     } catch (error) {
       console.error("Error fetching food details:", error);
     }
