@@ -1,0 +1,77 @@
+.about {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  text-align: center;
+  h1 {
+    width: fit-content;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: 0 auto;
+    background-color: $SECONDARY_COLOR;
+    box-shadow: -25px 0 20px -20px rgba(0, 0, 0, 0.45);
+  }
+  h2 {
+    padding: 0 1rem;
+  }
+  .about-body {
+    .overview {
+      div {
+        .overview-p {
+          background: url("../assets/images/color1.png") no-repeat center /
+            cover;
+        }
+      }
+    }
+    .tech-stack {
+      div {
+        .vue-p {
+          background: url("../assets/images/color2.png") no-repeat center /
+            cover;
+        }
+        .scss-p {
+          background: url("../assets/images/color3.png") no-repeat center /
+            cover;
+        }
+      }
+    }
+    .APIs {
+      div {
+        .first-api {
+          background: url("../assets/images/color4.png") no-repeat center /
+            cover;
+        }
+        .second-api {
+          background: url("../assets/images/color5.png") no-repeat center /
+            cover;
+        }
+        .third-api {
+          background: url("../assets/images/color6.png") no-repeat center /
+            cover;
+        }
+      }
+    }
+    .purpose {
+      div {
+        p {
+          background: url("../assets/images/color7.png") no-repeat center /
+            cover;
+        }
+      }
+    }
+    .overview,
+    .tech-stack,
+    .APIs,
+    .purpose {
+      div {
+        p {
+          padding: 2rem 2rem;
+          margin-top: 0;
+        }
+      }
+    }
+    .join-me {
+      width: 80%;
+      margin: 0 auto;
+    }
+  }
+}

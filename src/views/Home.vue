@@ -2,9 +2,9 @@
   <div class="home">
     <div class="app-title">
       <h1>Recipe App</h1>
-      <h4>Search recipes</h4>
-      <h4>Learn its nutrition</h4>
-      <h4>Find food by diets, allergies and calories</h4>
+      <h3>Search recipes</h3>
+      <h3>Learn its nutrition</h3>
+      <h3>Find food by diets, allergies and calories</h3>
     </div>
   </div>
 </template>

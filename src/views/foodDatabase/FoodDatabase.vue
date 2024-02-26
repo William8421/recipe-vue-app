@@ -1,6 +1,6 @@
 <template>
   <div class="food-database-container">
-    <h2>Food Database Search</h2>
+    <h2>Food Database</h2>
     <form @submit.prevent="searchFood">
       <input
         v-model="foodQuery"
@@ -23,12 +23,6 @@
         >
           <h3>{{ data.food.label }}</h3>
           <div class="food-card-body">
-            <!-- <div v-if="data.food.image" class="food-image-container">
-              <img :src="data.food.image" :alt="data.food.label" />
-            </div>
-            <div v-else class="food-image-container">
-              <div class="empty-image"></div>
-            </div> -->
             <div class="card-information">
               <div>
                 <strong>Calories:</strong>

@@ -1,10 +1,20 @@
 .home {
-  background: url("../assets/images/recipe-home-background.jpg") left/cover
-    no-repeat;
+  background: url("../assets/images/recipe-home-background.jpg") no-repeat top
+    left / cover;
   min-height: 100vh;
   overflow: hidden;
   color: $MY_DARK_COLOR;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
   .app-title {
-    padding-top: 10rem;
+    text-align: center;
+    width: 60%;
+    margin-top: 5rem;
+  }
+  .app-title,
+  h1 {
+    text-shadow: -1px -1px 0 $MY_LIGHT_COLOR, 1px -1px 0 $MY_LIGHT_COLOR,
+      -1px 1px 0 $MY_LIGHT_COLOR, 1px 1px 0 $MY_LIGHT_COLOR;
   }
 }

@@ -20,14 +20,14 @@
             width: 100%;
             padding: 0.5rem;
             border-radius: 0.5rem 0 0 0.5rem;
-            border: solid 3px $DARK_GREEN;
+            border: solid 3px $PRIMARY_COLOR;
             border-right: none;
           }
           input:focus {
             outline: none;
           }
           .search-icon {
-            background-color: $DARK_GREEN;
+            background-color: $PRIMARY_COLOR;
             border-radius: 0 0.5rem 0.5rem 0;
             border: none;
             width: 2.3rem;
@@ -55,7 +55,7 @@
         .filter-button,
         input {
           border-radius: 0.5rem;
-          border: solid 3px $DARK_GREEN;
+          border: solid 3px $PRIMARY_COLOR;
           background-color: $MY_LIGHT_COLOR;
           color: $MY_DARK_COLOR;
           width: 5rem;
@@ -72,7 +72,7 @@
         padding: 0.5rem;
         li {
           padding: 0.5rem;
-          background-color: $LIGHT_GREEN;
+          background-color: $SECONDARY_COLOR;
           border-radius: 1rem;
           list-style: none;
           margin: 0;
@@ -92,7 +92,7 @@
       width: fit-content;
       padding: 0.2rem;
       border-radius: 1rem;
-      background-color: $LIGHT_GREEN;
+      background-color: $SECONDARY_COLOR;
       display: flex;
       align-items: center;
       input {
@@ -129,10 +129,10 @@
     background-color: rgba(0, 0, 0, 0.4);
     padding-top: 60px;
     .modal-content {
-      background-color: #fefefe;
+      background-color: $PRIMARY_BACKGROUND_COLOR;
+      border-radius: 1rem;
       margin: 5% auto;
       padding: 20px;
-      border: 1px solid #888;
       width: 80%;
       .close {
         color: #aaa;

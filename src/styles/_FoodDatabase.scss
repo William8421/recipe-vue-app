@@ -8,7 +8,7 @@
       width: 80%;
       padding: 0.5rem;
       border-radius: 0.5rem;
-      border: solid 3px $DARK_GREEN;
+      border: solid 3px $PRIMARY_COLOR;
     }
     input:focus {
       outline: none;
@@ -33,7 +33,7 @@
           div {
             padding: 0.5rem 0;
             border-top: solid 1px $MY_LIGHT_COLOR;
-            background-color: $LIGHT_GREEN;
+            background-color: $SECONDARY_COLOR;
             span {
               margin-right: 1rem;
             }

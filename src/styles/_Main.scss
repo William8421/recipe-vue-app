@@ -1,24 +1,27 @@
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Noto Serif Khojki", serif;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  box-sizing: border-box;
 }
 body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  background-color: $LIGHT_GRAYISH;
+  background-color: $PRIMARY_BACKGROUND_COLOR;
 }
 
 .custom-button {
   padding: 0.5rem;
-  background-color: $DARK_GREEN;
+  background-color: $PRIMARY_COLOR;
   color: $MY_LIGHT_COLOR;
   border: none;
   border-radius: 0.5rem;
   font-size: 1rem;
   cursor: pointer;
+  font-family: "Annapurna SIL", serif;
 }
 
 h1,

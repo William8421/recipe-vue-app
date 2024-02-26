@@ -30,7 +30,7 @@
           @click="closeMenu"
           class="router-link"
         >
-          <i class="fa-solid fa-magnifying-glass"></i> Search Recipe
+          <i class="fa-solid fa-magnifying-glass"></i> Recipe Search
         </router-link>
         <router-link
           :to="{ name: 'FoodDatabase' }"

@@ -1,4 +1,4 @@
-@media (min-width: $SMALL_SCREEN) {
+@media screen and (min-width: $SMALL_SCREEN) {
   /* navbar */
   .navbar-container {
     nav {
@@ -131,9 +131,85 @@
       }
     }
   }
+  /*About*/
+  .about {
+    @include FLEX_COLUMN_CENTER;
+    background: url("../assets/images/about-background.jpg") center / cover
+      no-repeat;
+    max-height: 50vh;
+    width: 100%;
+    h1 {
+      background-color: transparent;
+      box-shadow: none;
+    }
+    h2 {
+      width: 80%;
+    }
+    .about-body {
+      .overview {
+        background-color: $SECONDARY_COLOR;
+        margin-left: auto;
+        margin-top: 10rem;
+        width: 80%;
+        text-align: left;
+        padding: 0.5rem 1rem;
+        div {
+          .overview-p {
+            background: none;
+            padding: 0;
+          }
+        }
+      }
+      .tech-stack {
+        padding: 1rem;
+        background-color: white;
+        margin: 2rem 0;
+        padding: 1rem;
+        text-align: left;
+        div {
+          .vue-p,
+          .scss-p {
+            background: none;
+            padding: 0;
+          }
+        }
+      }
+      .APIs {
+        div {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          .first-api,
+          .second-api,
+          .third-api {
+            width: 60%;
+            background: none;
+            background-color: $SECONDARY_COLOR;
+            padding: 1rem;
+            text-align: left;
+          }
+        }
+      }
+      .purpose {
+        text-align: left;
+        width: 80%;
+        background-color: $SECONDARY_BACKGROUND_COLOR;
+        padding: 0.5rem 1rem;
+        div {
+          p {
+            background: none;
+            padding: 0;
+          }
+        }
+      }
+      .join-me {
+        margin: 1rem;
+      }
+    }
+  }
 }
 
-@media (min-width: $MEDIUM_SCREEN) {
+@media screen and (min-width: $MEDIUM_SCREEN) {
   /*navbar*/
   .navbar-container {
     .burger-icon-container {
@@ -149,7 +225,12 @@
       align-items: center;
       height: fit-content;
       padding: 1rem;
-      background-color: $DARK_GREEN;
+      background: rgb(81, 161, 83);
+      background: linear-gradient(
+        90deg,
+        rgba(81, 161, 83, 1) 0%,
+        rgba(196, 230, 192, 1) 100%
+      );
       div {
         flex-direction: row;
         justify-content: space-around;
@@ -170,7 +251,7 @@
       }
     }
     nav a.router-link-exact-active {
-      color: $BEIGE;
+      color: $EFFECT_COLOR;
     }
   }
   /*nutrition route*/
@@ -199,9 +280,22 @@
       }
     }
   }
+  .food-database-container {
+    .food-results-container {
+      .food-results {
+        .food-card {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  /*About*/
+  .about {
+    max-height: 30vh;
+  }
 }
 
-@media (min-width: $LARGE_SCREEN) {
+@media screen and (min-width: $LARGE_SCREEN) {
   /*navbar*/
   .navbar-container {
     nav {
@@ -260,9 +354,13 @@
       }
     }
   }
+  /*About*/
+  .about {
+    max-height: 20vh;
+  }
 }
 
-@media (min-width: $EXTRA_LARGE_SCREEN) {
+@media screen and (min-width: $EXTRA_LARGE_SCREEN) {
   /*nutrition route*/
   .nutrition-analysis {
     .nutrition-analysis-container {
@@ -287,8 +385,17 @@
     .food-results-container {
       .food-results {
         .food-card {
-          width: 30%;
+          width: 20%;
         }
+      }
+    }
+  }
+  /*About*/
+  .about {
+    .about-body {
+      .overview {
+        margin-top: 7rem;
+        border: solid 1px red;
       }
     }
   }

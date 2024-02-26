@@ -4,7 +4,7 @@
     position: fixed;
     top: 0;
     height: 4rem;
-    background-color: $DARK_GREEN;
+    background-color: $PRIMARY_COLOR;
     @include FLEX_ROW_CENTER;
     z-index: 1001;
     h1 {
@@ -38,7 +38,7 @@
       padding-top: 2rem;
     }
     padding: 5rem 0 5rem 1rem;
-    background-color: $LIGHT_GRAYISH;
+    background-color: $PRIMARY_BACKGROUND_COLOR;
     position: fixed;
     top: 0;
     left: 0;
@@ -50,7 +50,7 @@
     overflow: auto;
 
     .router-link {
-      color: $DARK_GREEN;
+      color: $PRIMARY_COLOR;
       text-decoration: none;
       font-size: 1.5rem;
     }

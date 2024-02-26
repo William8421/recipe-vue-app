@@ -1,9 +1,11 @@
 @charset "UTF-8";
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Noto Serif Khojki", serif;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  box-sizing: border-box;
 }
 
 body {
@@ -15,12 +17,13 @@ body {
 
 .custom-button {
   padding: 0.5rem;
-  background-color: #88ab8e;
+  background-color: #51a153;
   color: white;
   border: none;
   border-radius: 0.5rem;
   font-size: 1rem;
   cursor: pointer;
+  font-family: "Annapurna SIL", serif;
 }
 
 h1,
@@ -28,7 +31,7 @@ h2,
 h3,
 .app-name {
   font-family: "Merriweather", serif;
-  color: rgb(7, 7, 7);
+  color: black;
 }
 
 .router-link {
@@ -40,14 +43,14 @@ h3,
   position: fixed;
   top: 0;
   height: 4rem;
-  background-color: #88ab8e;
+  background-color: #51a153;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1001;
 }
 .navbar-container .burger-icon-container h1 {
-  color: rgb(7, 7, 7);
+  color: black;
 }
 .navbar-container .burger-icon {
   display: block;
@@ -86,7 +89,7 @@ h3,
   padding-top: 2rem;
 }
 .navbar-container nav .router-link {
-  color: #88ab8e;
+  color: #51a153;
   text-decoration: none;
   font-size: 1.5rem;
 }
@@ -98,13 +101,22 @@ h3,
 }
 
 .home {
-  background: url("../assets/images/recipe-home-background.jpg") left/cover no-repeat;
+  background: url("../assets/images/recipe-home-background.jpg") no-repeat top left/cover;
   min-height: 100vh;
   overflow: hidden;
-  color: rgb(7, 7, 7);
+  color: black;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
 }
 .home .app-title {
-  padding-top: 10rem;
+  text-align: center;
+  width: 60%;
+  margin-top: 5rem;
+}
+.home .app-title,
+.home h1 {
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
 }
 
 .nutrition-analysis {
@@ -136,16 +148,17 @@ h3,
   align-items: center;
 }
 .nutrition-analysis .nutrition-analysis-container .results table {
-  border: solid 1px #88ab8e;
+  border: solid 1px #51a153;
 }
 .nutrition-analysis .nutrition-analysis-container .results table thead {
-  background-color: #88ab8e;
+  background-color: #c4e6c0;
 }
 .nutrition-analysis .nutrition-analysis-container .results table tbody td {
   background-color: white;
   padding: 0 0.5rem;
 }
 .nutrition-analysis .nutrition-analysis-container .information {
+  box-shadow: -25px 0 20px -20px rgba(0, 0, 0, 0.45);
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -195,14 +208,14 @@ h3,
   width: 100%;
   padding: 0.5rem;
   border-radius: 0.5rem 0 0 0.5rem;
-  border: solid 3px #88ab8e;
+  border: solid 3px #51a153;
   border-right: none;
 }
 .search-recipe-container .search-recipe-block form .keywords .input-button-container input:focus {
   outline: none;
 }
 .search-recipe-container .search-recipe-block form .keywords .input-button-container .search-icon {
-  background-color: #88ab8e;
+  background-color: #51a153;
   border-radius: 0 0.5rem 0.5rem 0;
   border: none;
   width: 2.3rem;
@@ -231,9 +244,9 @@ h3,
 .search-recipe-container .search-recipe-block form .filter-buttons-container .filter-button,
 .search-recipe-container .search-recipe-block form .filter-buttons-container input {
   border-radius: 0.5rem;
-  border: solid 3px #88ab8e;
+  border: solid 3px #51a153;
   background-color: white;
-  color: rgb(7, 7, 7);
+  color: black;
   width: 5rem;
 }
 .search-recipe-container .search-recipe-block .selected-filters {
@@ -248,7 +261,7 @@ h3,
 }
 .search-recipe-container .search-recipe-block .selected-filters ul li {
   padding: 0.5rem;
-  background-color: #daefd9;
+  background-color: #c4e6c0;
   border-radius: 1rem;
   list-style: none;
   margin: 0;
@@ -266,7 +279,7 @@ h3,
   width: fit-content;
   padding: 0.2rem;
   border-radius: 1rem;
-  background-color: #daefd9;
+  background-color: #c4e6c0;
   display: flex;
   align-items: center;
 }
@@ -303,10 +316,10 @@ h3,
   padding-top: 60px;
 }
 .search-recipe-container .modal .modal-content {
-  background-color: #fefefe;
+  background-color: #f2f1eb;
+  border-radius: 1rem;
   margin: 5% auto;
   padding: 20px;
-  border: 1px solid #888;
   width: 80%;
 }
 .search-recipe-container .modal .modal-content .close {
@@ -320,7 +333,7 @@ h3,
 }
 .search-recipe-container .modal .close:hover,
 .search-recipe-container .modal .close:focus {
-  color: rgb(7, 7, 7);
+  color: black;
   text-decoration: none;
   cursor: pointer;
 }
@@ -371,8 +384,8 @@ h3,
   padding-left: 0;
 }
 .recipes .cards-container .arrow-icons {
-  border: solid 3px #88ab8e;
-  color: #88ab8e;
+  border: solid 3px #51a153;
+  color: #51a153;
   padding: 0.5rem;
   width: 1rem;
   height: 1rem;
@@ -397,7 +410,7 @@ h3,
   width: 80%;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  border: solid 3px #88ab8e;
+  border: solid 3px #51a153;
 }
 .food-database-container form input:focus {
   outline: none;
@@ -429,7 +442,7 @@ h3,
 .food-database-container .food-results .food-card .food-card-body .card-information div {
   padding: 0.5rem 0;
   border-top: solid 1px white;
-  background-color: #daefd9;
+  background-color: #c4e6c0;
 }
 .food-database-container .food-results .food-card .food-card-body .card-information div span {
   margin-right: 1rem;
@@ -468,10 +481,10 @@ h3,
 .food-details-container .details-results .details-card .details-card-body .details-card-information {
   width: 100%;
   padding: 0;
-  background-color: #daefd9;
+  background-color: #c4e6c0;
 }
 .food-details-container .details-results .details-card .details-card-body .details-card-information div {
-  border-top: solid 1px #88ab8e;
+  border-top: solid 1px #51a153;
   padding: 0.5rem 5rem;
   display: flex;
   justify-content: space-between;
@@ -481,7 +494,56 @@ h3,
   min-height: 1.5rem;
 }
 
-@media (min-width: 576px) {
+.about {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  text-align: center;
+}
+.about h1 {
+  width: fit-content;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin: 0 auto;
+  background-color: #c4e6c0;
+  box-shadow: -25px 0 20px -20px rgba(0, 0, 0, 0.45);
+}
+.about h2 {
+  padding: 0 1rem;
+}
+.about .about-body .overview div .overview-p {
+  background: url("../assets/images/color1.png") no-repeat center/cover;
+}
+.about .about-body .tech-stack div .vue-p {
+  background: url("../assets/images/color2.png") no-repeat center/cover;
+}
+.about .about-body .tech-stack div .scss-p {
+  background: url("../assets/images/color3.png") no-repeat center/cover;
+}
+.about .about-body .APIs div .first-api {
+  background: url("../assets/images/color4.png") no-repeat center/cover;
+}
+.about .about-body .APIs div .second-api {
+  background: url("../assets/images/color5.png") no-repeat center/cover;
+}
+.about .about-body .APIs div .third-api {
+  background: url("../assets/images/color6.png") no-repeat center/cover;
+}
+.about .about-body .purpose div p {
+  background: url("../assets/images/color7.png") no-repeat center/cover;
+}
+.about .about-body .overview div p,
+.about .about-body .tech-stack div p,
+.about .about-body .APIs div p,
+.about .about-body .purpose div p {
+  padding: 2rem 2rem;
+  margin-top: 0;
+}
+.about .about-body .join-me {
+  width: 80%;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 576px) {
   /* navbar */
   .navbar-container nav div {
     gap: 1rem;
@@ -584,8 +646,75 @@ h3,
     border-radius: 0;
     min-height: 1.5rem;
   }
+  /*About*/
+  .about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: url("../assets/images/about-background.jpg") center/cover no-repeat;
+    max-height: 50vh;
+    width: 100%;
+  }
+  .about h1 {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  .about h2 {
+    width: 80%;
+  }
+  .about .about-body .overview {
+    background-color: #c4e6c0;
+    margin-left: auto;
+    margin-top: 10rem;
+    width: 80%;
+    text-align: left;
+    padding: 0.5rem 1rem;
+  }
+  .about .about-body .overview div .overview-p {
+    background: none;
+    padding: 0;
+  }
+  .about .about-body .tech-stack {
+    padding: 1rem;
+    background-color: white;
+    margin: 2rem 0;
+    padding: 1rem;
+    text-align: left;
+  }
+  .about .about-body .tech-stack div .vue-p,
+  .about .about-body .tech-stack div .scss-p {
+    background: none;
+    padding: 0;
+  }
+  .about .about-body .APIs div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .about .about-body .APIs div .first-api,
+  .about .about-body .APIs div .second-api,
+  .about .about-body .APIs div .third-api {
+    width: 60%;
+    background: none;
+    background-color: #c4e6c0;
+    padding: 1rem;
+    text-align: left;
+  }
+  .about .about-body .purpose {
+    text-align: left;
+    width: 80%;
+    background-color: #fce8d2;
+    padding: 0.5rem 1rem;
+  }
+  .about .about-body .purpose div p {
+    background: none;
+    padding: 0;
+  }
+  .about .about-body .join-me {
+    margin: 1rem;
+  }
 }
-@media (min-width: 768px) {
+@media screen and (min-width: 750px) {
   /*navbar*/
   .navbar-container .burger-icon-container {
     display: none;
@@ -600,7 +729,8 @@ h3,
     align-items: center;
     height: fit-content;
     padding: 1rem;
-    background-color: #88ab8e;
+    background: rgb(81, 161, 83);
+    background: linear-gradient(90deg, rgb(81, 161, 83) 0%, rgb(196, 230, 192) 100%);
   }
   .navbar-container nav div {
     flex-direction: row;
@@ -612,7 +742,7 @@ h3,
   .navbar-container nav .router-link {
     font-size: 1rem;
     text-decoration: underline;
-    color: rgb(7, 7, 7);
+    color: black;
   }
   .navbar-container nav .app-name {
     display: block;
@@ -621,7 +751,7 @@ h3,
     text-decoration: none;
   }
   .navbar-container nav a.router-link-exact-active {
-    color: #eee7da;
+    color: #8d3f27;
   }
   /*nutrition route*/
   .nutrition-analysis {
@@ -643,8 +773,15 @@ h3,
     display: block;
     padding-bottom: 1rem;
   }
+  .food-database-container .food-results-container .food-results .food-card {
+    cursor: pointer;
+  }
+  /*About*/
+  .about {
+    max-height: 30vh;
+  }
 }
-@media (min-width: 992px) {
+@media screen and (min-width: 992px) {
   /*navbar*/
   .navbar-container nav .router-container {
     gap: 3rem;
@@ -697,8 +834,12 @@ h3,
   .search-recipe-container .recipes .cards-container .recipe-card .recipe-hidden-body .card-nutrients {
     width: 100%;
   }
+  /*About*/
+  .about {
+    max-height: 20vh;
+  }
 }
-@media (min-width: 1200px) {
+@media screen and (min-width: 1200px) {
   /*nutrition route*/
   .nutrition-analysis .nutrition-analysis-container {
     justify-content: space-around;
@@ -712,7 +853,12 @@ h3,
   }
   /*food database route*/
   .food-database-container .food-results-container .food-results .food-card {
-    width: 30%;
+    width: 20%;
+  }
+  /*About*/
+  .about .about-body .overview {
+    margin-top: 7rem;
+    border: solid 1px red;
   }
 }
 
