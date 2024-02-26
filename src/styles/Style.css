@@ -728,7 +728,7 @@ h3,
     justify-content: space-between;
     align-items: center;
     height: fit-content;
-    padding: 1rem;
+    padding: 0.3rem 1rem;
     background: rgb(81, 161, 83);
     background: linear-gradient(90deg, rgb(81, 161, 83) 0%, rgb(196, 230, 192) 100%);
   }
