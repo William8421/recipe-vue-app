@@ -51,67 +51,88 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
+// functions from the Vue framework
+import { defineComponent } from "vue";
+// libraries
 import axios from "axios";
-import { ref, computed, onMounted } from "vue";
-import {
-  NutritionData,
-  NutritionMethods,
-  NutrientInformation,
-} from "../types/Types";
-
+// types
+import { NutritionData, NutritionMethods } from "../types/Types";
+// components for nutrition analysis
 import NutritionInformation from "../components/nutritionAnalysis/NutritionInformation.vue";
 import NutritionTable from "../components/nutritionAnalysis/NutritionTable.vue";
 
-const foodDescription = ref("");
-const nutritionData = ref<NutritionData | null>(null);
+export default defineComponent({
+  components: { NutritionTable, NutritionInformation },
+  data() {
+    return {
+      foodDescription: "",
+      nutritionData: null as NutritionData | null,
+    };
+  },
+  computed: {
+    // Computed property to extract relevant nutrition information
+    nutritionInformation(this: NutritionMethods) {
+      if (!this.nutritionData) return [];
+      // Selected nutrient keys for display
+      const selectedNutrientKeys = [
+        "FAT",
+        "CHOLE",
+        "NA",
+        "CHOCDF",
+        "PROCNT",
+        "VITD",
+        "CA",
+        "FE",
+        "K",
+      ];
+      // Map selected nutrient keys to structured data
+      return selectedNutrientKeys.map((key) => ({
+        label: this.nutritionData.totalDaily[key].label,
+        quantity: this.nutritionData.totalNutrients[key].quantity,
+        unit: this.nutritionData.totalNutrients[key].unit,
+        totalQuantity: this.nutritionData.totalDaily[key].quantity,
+        totalUnit: this.nutritionData.totalDaily[key].unit,
+      }));
+    },
+  },
+  methods: {
+    // Asynchronous method to analyze nutrition based on provided food description
+    async analyzeNutrition(this: NutritionMethods) {
+      try {
+        // API credentials
+        const appId = process.env.VUE_APP_NUTRITION_API_ID;
+        const appKey = process.env.VUE_APP_NUTRITION_API_KEY;
+        const apiUrl = `https://api.edamam.com/api/nutrition-details?app_id=${appId}&app_key=${appKey}`;
 
-const nutritionInformation = computed<NutrientInformation[]>(() => {
-  if (!nutritionData.value) return [];
+        // Split and filter input into an array of ingredients
+        const ingredientsArray: string[] = this.foodDescription
+          .split("\n")
+          .filter((ingredient: string) => ingredient.trim() !== "");
+        const requestData = { ingr: ingredientsArray };
 
-  const selectedNutrientKeys = [
-    "FAT",
-    "CHOLE",
-    "NA",
-    "CHOCDF",
-    "PROCNT",
-    "VITD",
-    "CA",
-    "FE",
-    "K",
-  ];
+        // Make API request using await
+        const response = await axios.post(apiUrl, requestData);
 
-  return selectedNutrientKeys.map((key) => ({
-    label: nutritionData.value!.totalDaily[key].label,
-    quantity: nutritionData.value!.totalNutrients[key].quantity,
-    unit: nutritionData.value!.totalNutrients[key].unit,
-    totalQuantity: nutritionData.value!.totalDaily[key].quantity,
-    totalUnit: nutritionData.value!.totalDaily[key].unit,
-  }));
-});
-
-const analyzeNutrition = async () => {
-  try {
-    const appId = process.env.VUE_APP_NUTRITION_API_ID;
-    const appKey = process.env.VUE_APP_NUTRITION_API_KEY;
-    const apiUrl = `https://api.edamam.com/api/nutrition-details?app_id=${appId}&app_key=${appKey}`;
-
-    const ingredientsArray: string[] = foodDescription.value
-      .split("\n")
-      .filter((ingredient: string) => ingredient.trim() !== "");
-    const requestData = { ingr: ingredientsArray };
-    const response = await axios.post(apiUrl, requestData);
-    nutritionData.value = response.data;
-    localStorage.setItem("nutritionData", JSON.stringify(nutritionData.value));
-  } catch (error) {
-    console.error("Error analyzing nutrition:", error);
-  }
-};
-
-onMounted(() => {
-  const savedData = localStorage.getItem("nutritionData");
-  if (savedData !== null) {
-    nutritionData.value = JSON.parse(savedData);
-  }
+        // Update nutrition data with the response
+        this.nutritionData = response.data;
+      } catch (error) {
+        // Log error if there's an issue with the API request
+        console.error("Error analyzing nutrition:", error);
+      }
+    },
+  },
+  beforeRouteLeave(to, from, next) {
+    // Save nutrition data to local storage before leaving the route
+    localStorage.setItem("nutritionData", JSON.stringify(this.nutritionData));
+    next();
+  },
+  created() {
+    // Load stored nutrition data from local storage on component creation
+    const storedData = localStorage.getItem("nutritionData");
+    if (storedData) {
+      this.nutritionData = JSON.parse(storedData);
+    }
+  },
 });
 </script>

@@ -69,9 +69,13 @@
 </template>
 
 <script lang="ts">
+// functions from the Vue framework
 import { defineComponent } from "vue";
-import { Recipe } from "../types/Types";
+// libraries
 import axios from "axios";
+// types
+import { Recipe } from "../types/Types";
+// components for Search Recipe
 import Modal from "../components/searchRecipe/Modal.vue";
 import Recipes from "../components/searchRecipe/Recipe.vue";
 import FilterOptions from "../components/searchRecipe/FilterOptions.vue";
@@ -86,13 +90,21 @@ export default defineComponent({
   },
   data() {
     return {
+      // Search query for recipes
       searchQuery: "",
+      // Selected diet options
       selectedDiets: [] as string[],
+      // Selected allergy options
       selectedAllergies: [] as string[],
+      // Caloric intake filter
       calories: null as number | null,
+      // Flag to show/hide diet modal
       showDietModal: false,
+      // Flag to show/hide allergies modal
       showAllergiesModal: false,
+      // Store recipes received from API
       recipes: null as Recipe | null,
+      // List of allergy options
       allergies: [
         "celery-free",
         "crustacean-free",
@@ -109,6 +121,7 @@ export default defineComponent({
         "tree-Nut-free",
         "wheat-free",
       ],
+      // List of diet options
       dietOptions: [
         "alcohol-free",
         "keto-friendly",
@@ -132,69 +145,75 @@ export default defineComponent({
     };
   },
   methods: {
-    searchRecipes() {
-      const appId = process.env.VUE_APP_SEARCH_API_ID;
-      const appKey = process.env.VUE_APP_SEARCH_API_KEY;
+    // Asynchronous method to search recipes based on user input and filters
+    async searchRecipes() {
+      try {
+        // API credentials
+        const appId = process.env.VUE_APP_SEARCH_API_ID;
+        const appKey = process.env.VUE_APP_SEARCH_API_KEY;
 
-      let apiUrl = `https://api.edamam.com/search?app_id=${appId}&app_key=${appKey}&q=${this.searchQuery}`;
+        let apiUrl = `https://api.edamam.com/search?app_id=${appId}&app_key=${appKey}&q=${this.searchQuery}`;
 
-      const dietTerms = [
-        "balanced",
-        "high-fiber",
-        "high-protein",
-        "low-carb",
-        "low-fat",
-        "low-sodium",
-      ];
+        const dietTerms = [
+          "balanced",
+          "high-fiber",
+          "high-protein",
+          "low-carb",
+          "low-fat",
+          "low-sodium",
+        ];
 
-      // Separate selectedDiets into diet and health terms
-      const selectedDietTerms = this.selectedDiets.filter((diet) =>
-        dietTerms.includes(diet)
-      );
-      const selectedHealthTerms = this.selectedDiets.filter(
-        (diet) => !dietTerms.includes(diet)
-      );
+        // Separate selectedDiets into diet and health terms
+        const selectedDietTerms = this.selectedDiets.filter((diet) =>
+          dietTerms.includes(diet)
+        );
+        const selectedHealthTerms = this.selectedDiets.filter(
+          (diet) => !dietTerms.includes(diet)
+        );
 
-      // Generate URL based on the presence of diet terms
-      if (selectedDietTerms.length > 0) {
-        apiUrl += `&diet=${selectedDietTerms.join("&diet=")}`;
+        // Generate URL based on the presence of diet terms
+        if (selectedDietTerms.length > 0) {
+          apiUrl += `&diet=${selectedDietTerms.join("&diet=")}`;
+        }
+        // Include health terms
+        if (selectedHealthTerms.length > 0) {
+          apiUrl += `&health=${selectedHealthTerms.join("&health=")}`;
+        }
+        // Include selected allergies
+        if (this.selectedAllergies.length > 0) {
+          apiUrl += `&health=${this.selectedAllergies.join("&")}`;
+        }
+        // Include calories filter
+        if (this.calories) {
+          apiUrl += `&calories=${this.calories}`;
+        }
+
+        // Make API request using await
+        const response = await axios.get(apiUrl);
+
+        // Update recipes with the response
+        this.recipes = response.data.hits;
+      } catch (error) {
+        // Log error if there's an issue with the API request
+        console.error("Error searching recipes:", error);
       }
-
-      // Include health terms
-      if (selectedHealthTerms.length > 0) {
-        apiUrl += `&health=${selectedHealthTerms.join("&health=")}`;
-      }
-
-      if (this.selectedAllergies.length > 0) {
-        apiUrl += `&health=${this.selectedAllergies.join("&")}`;
-      }
-      if (this.calories) {
-        apiUrl += `&calories=${this.calories}`;
-      }
-
-      axios
-        .get(apiUrl)
-        .then((response) => {
-          this.recipes = response.data.hits;
-        })
-        .catch((error) => {
-          console.error("Error searching recipes:", error);
-        });
     },
-
+    // Toggle the display of the diet modal
     openCloseDietModal() {
       this.showDietModal = !this.showDietModal;
     },
+    // Toggle the display of the allergies modal
     openCloseAllergiesModal() {
       this.showAllergiesModal = !this.showAllergiesModal;
     },
   },
 
-  // local storage
+  // Save recipes to local storage before leaving the route
   beforeRouteLeave(to, from, next) {
     localStorage.setItem("recipes", JSON.stringify(this.recipes));
     next();
   },
+  // Load stored recipes from local storage on component creation
   created() {
     const storedData = localStorage.getItem("recipes");
     if (storedData) {

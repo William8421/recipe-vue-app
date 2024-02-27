@@ -5,7 +5,6 @@
         <h1>Recipe App</h1>
       </div>
     </div>
-
     <div class="burger-icon" @click="toggleMenu">
       <div class="bar"></div>
       <div class="bar"></div>
@@ -15,33 +14,33 @@
     <nav :class="{ 'menu-open': isMenuOpen }">
       <div class="app-name">Recipe App</div>
       <div class="router-container">
-        <router-link to="/" @click="closeMenu" class="router-link">
+        <router-link to="/" @click="toggleMenu" class="router-link">
           <i class="fa-solid fa-house"></i> Home</router-link
         >
         <router-link
           :to="{ name: 'NutritionAnalysis' }"
-          @click="closeMenu"
+          @click="toggleMenu"
           class="router-link"
         >
           <i class="fa-brands fa-nutritionix"></i> Nutrition Analysis
         </router-link>
         <router-link
           :to="{ name: 'SearchRecipe' }"
-          @click="closeMenu"
+          @click="toggleMenu"
           class="router-link"
         >
           <i class="fa-solid fa-magnifying-glass"></i> Recipe Search
         </router-link>
         <router-link
           :to="{ name: 'FoodDatabase' }"
-          @click="closeMenu"
+          @click="toggleMenu"
           class="router-link"
         >
           <i class="fa-solid fa-database"></i> Food Database
         </router-link>
         <router-link
           :to="{ name: 'About' }"
-          @click="closeMenu"
+          @click="toggleMenu"
           class="router-link"
         >
           <i class="fa-solid fa-circle-info"></i> About
@@ -59,11 +58,9 @@ export default {
     };
   },
   methods: {
+    // toggle burger menu
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
-    },
-    closeMenu() {
-      this.isMenuOpen = false;
     },
   },
 };

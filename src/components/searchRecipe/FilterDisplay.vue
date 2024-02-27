@@ -10,11 +10,15 @@
 </template>
 
 <script lang="ts">
+// functions from the Vue framework
 import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
+  // Props definition
   props: {
+    // Prop for the title, expecting a String
     title: String,
+    // Prop for the items, expecting an Array of strings and is required
     items: {
       type: Array as PropType<string[]>,
       required: true,

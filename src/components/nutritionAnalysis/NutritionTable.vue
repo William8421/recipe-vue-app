@@ -25,15 +25,19 @@
 </template>
 
 <script lang="ts">
+// types
 import { NutritionData, NutritionMethods } from "../../types/Types";
 export default {
+  // Declaring component props
   props: {
     nutritionData: Object as () => NutritionData | null,
   },
+  // Calculating Computed Properties for Calculated Ingredients
   computed: {
     calculatedIngredients(this: NutritionMethods) {
+      // Return an empty array if no nutrition data is available
       if (!this.nutritionData) return [];
-
+      // Map ingredients for display in the table
       return this.nutritionData.ingredients.map((ingredient) => ({
         quantity: ingredient.parsed[0].quantity,
         measure: ingredient.parsed[0].measure,

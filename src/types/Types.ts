@@ -62,6 +62,11 @@ export interface Recipe {
   yield: number;
 }
 
+export interface FilterOptionsProps {
+  options: string[];
+  modelValue: string[];
+}
+
 // Food Database
 export interface FoodData {
   knownAs: string;

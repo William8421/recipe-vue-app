@@ -40,39 +40,50 @@
 </template>
 
 <script lang="ts">
+// functions from the Vue framework
 import { defineComponent } from "vue";
+// libraries
 import axios from "axios";
+// types
 import { FoodData } from "../../types/Types";
 
 export default defineComponent({
   data() {
     return {
+      // Query for searching food
       foodQuery: "",
+      // Array to store food data
       foodData: [] as FoodData[],
     };
   },
   methods: {
+    // Asynchronous method to search for food based on user input
     async searchFood() {
       try {
+        // API credentials
         const apiId = process.env.VUE_APP_FOOD_DATABASE_API_ID;
         const apiKey = process.env.VUE_APP_FOOD_DATABASE_API_KEY;
         const apiUrl = `https://api.edamam.com/api/food-database/v2/parser?app_key=${apiKey}&app_id=${apiId}&ingr=${encodeURIComponent(
           this.foodQuery
         )}`;
-
+        // Make API request using await
         const response = await axios.get(apiUrl);
+        // Update foodData with the response
         this.foodData = response.data.hints;
-        console.log(this.foodData);
+        // Save foodData to local storage
         localStorage.setItem("foodData", JSON.stringify(this.foodData));
       } catch (error) {
+        // Log error if there's an issue with the API request
         console.error("Error searching food:", error);
       }
     },
+    // Method to navigate to food details page
     navigateToFoodDetails(foodId: string) {
       this.$router.push({ name: "FoodDetails", params: { foodId: foodId } });
     },
   },
   created() {
+    // Load stored food data from local storage on component creation
     const storedData = localStorage.getItem("foodData");
     if (storedData) {
       this.foodData = JSON.parse(storedData);

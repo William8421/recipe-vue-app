@@ -29,6 +29,13 @@
         }
       }
     }
+    .modal {
+      .modal-content {
+        width: 60%;
+        margin: 0 auto;
+        margin-bottom: 2rem;
+      }
+    }
     .recipes {
       .cards-container {
         .recipe-card {
@@ -48,7 +55,6 @@
             }
             .health-labels {
               width: 60%;
-              font-size: 0.8rem;
               h2 {
                 margin-top: 0;
               }
@@ -62,6 +68,9 @@
             justify-content: space-around;
             .card-ingredients {
               width: 45%;
+              div {
+                border-right: solid 1px $PRIMARY_COLOR;
+              }
             }
             .card-nutrients {
               width: 45%;
@@ -104,6 +113,7 @@
       .details-card {
         width: 50%;
         margin-bottom: 3rem;
+        padding: 2rem;
         .details-card-body {
           flex-direction: row;
           align-items: flex-end;
@@ -124,7 +134,6 @@
             }
             .brand {
               border-radius: 0;
-              min-height: 1.5rem;
             }
           }
         }
@@ -224,7 +233,7 @@
       justify-content: space-between;
       align-items: center;
       height: fit-content;
-      padding: 0.3rem 1rem;
+      padding: 0.5rem 1rem;
       background: rgb(81, 161, 83);
       background: linear-gradient(
         90deg,
@@ -245,7 +254,6 @@
       }
       .app-name {
         display: block;
-        font-weight: bolder;
         font-size: 1.4rem;
         text-decoration: none;
       }
@@ -256,7 +264,6 @@
   }
   /*nutrition route*/
   .nutrition-analysis {
-    padding-bottom: 2rem;
     .nutrition-analysis-container {
       flex-direction: row;
       align-items: flex-start;
@@ -315,6 +322,15 @@
   }
   /*search recipe route*/
   .search-recipe-container {
+    .search-recipe-block {
+      width: 60%;
+      margin: 0 auto;
+    }
+    .modal {
+      .modal-content {
+        width: 40%;
+      }
+    }
     .recipes {
       .cards-container {
         flex-direction: row;
@@ -335,7 +351,7 @@
             }
             .health-labels {
               width: 80%;
-              max-height: 200px;
+              height: 200px;
               overflow: auto;
               font-size: 1rem;
             }
@@ -345,6 +361,9 @@
             width: 80%;
             .card-ingredients {
               width: 100%;
+              div {
+                border: none;
+              }
             }
             .card-nutrients {
               width: 100%;
@@ -364,7 +383,6 @@
   /*nutrition route*/
   .nutrition-analysis {
     .nutrition-analysis-container {
-      justify-content: space-around;
       .information {
         max-width: 20rem;
       }

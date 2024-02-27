@@ -35,34 +35,38 @@
 </template>
 
 <script>
+// functions from the Vue framework
+import { defineComponent } from "vue";
+// libraries
 import axios from "axios";
 
-export default {
+export default defineComponent({
   data() {
     return {
+      // Placeholder for food data
       foodData: null,
     };
   },
+  // Lifecycle hook: Executed after the component is mounted
   async mounted() {
     try {
+      // Retrieve foodId parameter from the route
       const foodId = this.$route.params.foodId;
+      // API credentials
       const apiId = process.env.VUE_APP_FOOD_DATABASE_API_ID;
       const apiKey = process.env.VUE_APP_FOOD_DATABASE_API_KEY;
-
+      // Make API request to get food details based on foodId
       const response = await axios.get(
         `https://api.edamam.com/api/food-database/v2/parser?app_key=${apiKey}&app_id=${apiId}&ingr=${encodeURIComponent(
           foodId
         )}`
       );
-
+      // Extract and store relevant food details from the API response
       this.foodData = response.data.hints[0].food;
-      console.log(this.foodData);
     } catch (error) {
+      // Log error if there's an issue with the API request
       console.error("Error fetching food details:", error);
     }
   },
-};
+});
 </script>
-
-<style>
-</style>

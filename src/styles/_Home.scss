@@ -6,11 +6,9 @@
   color: $MY_DARK_COLOR;
   display: flex;
   justify-content: flex-end;
-  align-items: flex-start;
+  align-items: center;
   .app-title {
-    text-align: center;
     width: 60%;
-    margin-top: 5rem;
   }
   .app-title,
   h1 {

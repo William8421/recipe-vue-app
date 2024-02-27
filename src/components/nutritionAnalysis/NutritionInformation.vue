@@ -1,15 +1,12 @@
 <template>
   <div class="values">
-    <!-- label -->
     <span>
       <strong>
         {{ label }}
       </strong>
-      <!-- total Nutrients -->
       {{ Math.round(quantity) }}
       {{ unit }}
     </span>
-    <!-- total daily -->
     <span>
       <strong> {{ Math.round(totalQuantity) }}{{ totalUnit }} </strong>
     </span>
@@ -17,8 +14,10 @@
 </template>
 
 <script lang="ts">
+// types
 import { NutritionData } from "../../types/Types";
 export default {
+  // Declaring component props
   props: {
     label: String,
     quantity: Number,
