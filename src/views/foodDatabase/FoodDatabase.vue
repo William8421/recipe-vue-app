@@ -11,6 +11,14 @@
       />
       <button class="custom-button" type="submit">Search</button>
     </form>
+    <h3>Sample Searches</h3>
+    <div class="sample-searches-container">
+      <div v-for="sample in sampleSearches" :key="sample">
+        <div @click="callSampleSearch(sample)" class="sample">
+          {{ sample }},
+        </div>
+      </div>
+    </div>
 
     <div v-if="foodData" class="food-results-container">
       <h3>Food Information</h3>
@@ -54,6 +62,18 @@ export default defineComponent({
       foodQuery: "",
       // Array to store food data
       foodData: [] as FoodData[],
+      // sample searches
+      sampleSearches: [
+        "Burger King",
+        "chicken wings",
+        "potato chips",
+        "Starbucks cake",
+        "oatmeal",
+        "fried eggs",
+        "blueberry pancakes",
+        "Pizza Hut",
+        "low fat milk",
+      ],
     };
   },
   methods: {
@@ -76,6 +96,11 @@ export default defineComponent({
         // Log error if there's an issue with the API request
         console.error("Error searching food:", error);
       }
+    },
+    // Method to initiate a food search using a sample query
+    callSampleSearch(sample: string) {
+      this.foodQuery = sample;
+      this.searchFood();
     },
     // Method to navigate to food details page
     navigateToFoodDetails(foodId: string) {
