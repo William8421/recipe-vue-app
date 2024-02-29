@@ -29,13 +29,6 @@
         }
       }
     }
-    .modal {
-      .modal-content {
-        width: 60%;
-        margin: 0 auto;
-        margin-bottom: 2rem;
-      }
-    }
     .recipes {
       .cards-container {
         .recipe-card {
@@ -79,7 +72,12 @@
         }
       }
     }
-    .modal {
+  }
+  .modal {
+    .modal-content {
+      width: 60%;
+      margin: 0 auto;
+      margin-bottom: 2rem;
       button {
         margin-bottom: 2rem;
       }
@@ -92,17 +90,15 @@
       margin: 0 auto;
       flex-direction: row;
     }
-    .food-results-container {
-      .food-results {
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: flex-start;
-        justify-content: space-around;
-        .food-card {
-          width: 40%;
-          .food-card-body {
-            flex-direction: row;
-          }
+    .food-results {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-around;
+      .food-card {
+        width: 40%;
+        .food-card-body {
+          flex-direction: row;
         }
       }
     }
@@ -212,7 +208,7 @@
         }
       }
       .join-me {
-        margin: 1rem;
+        margin: 1rem auto;
       }
     }
   }
@@ -288,11 +284,9 @@
     }
   }
   .food-database-container {
-    .food-results-container {
-      .food-results {
-        .food-card {
-          cursor: pointer;
-        }
+    .food-results {
+      .food-card {
+        cursor: pointer;
       }
     }
   }
@@ -325,11 +319,6 @@
     .search-recipe-block {
       width: 60%;
       margin: 0 auto;
-    }
-    .modal {
-      .modal-content {
-        width: 40%;
-      }
     }
     .recipes {
       .cards-container {
@@ -373,6 +362,11 @@
       }
     }
   }
+  .modal {
+    .modal-content {
+      width: 40%;
+    }
+  }
   /*About*/
   .about {
     max-height: 20vh;
@@ -400,11 +394,9 @@
   }
   /*food database route*/
   .food-database-container {
-    .food-results-container {
-      .food-results {
-        .food-card {
-          width: 20%;
-        }
+    .food-results {
+      .food-card {
+        width: 20%;
       }
     }
   }
@@ -413,7 +405,6 @@
     .about-body {
       .overview {
         margin-top: 7rem;
-        border: solid 1px red;
       }
     }
   }

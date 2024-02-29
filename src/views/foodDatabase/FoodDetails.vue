@@ -24,9 +24,10 @@
               <strong>Protein:</strong>
               <span>{{ Math.round(foodData.nutrients.PROCNT) }} g</span>
             </div>
-            <div class="brand">
-              <span>{{ foodData.brand }}</span>
+            <div v-if="foodData.brand">
+              <strong>Brand:</strong> <span>{{ foodData.brand }}</span>
             </div>
+            <div v-else class="brand"></div>
           </div>
         </div>
       </div>

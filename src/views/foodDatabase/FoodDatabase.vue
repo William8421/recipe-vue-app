@@ -11,6 +11,14 @@
       />
       <button class="custom-button" type="submit">Search</button>
     </form>
+    <Modal
+      :show="error"
+      :closeModal="closeErrorModal"
+      header="Error"
+      close="Close"
+    >
+      <ErrorModal :message="errorMessage" />
+    </Modal>
     <h3>Sample Searches</h3>
     <div class="sample-searches-container">
       <div v-for="sample in sampleSearches" :key="sample">
@@ -20,8 +28,7 @@
       </div>
     </div>
 
-    <div v-if="foodData" class="food-results-container">
-      <h3>Food Information</h3>
+    <div v-if="foodData">
       <div class="food-results">
         <div
           v-for="(data, index) in foodData"
@@ -55,13 +62,19 @@ import axios from "axios";
 // types
 import { FoodData } from "../../types/Types";
 
+import Modal from "../../components/searchRecipe/Modal.vue";
+import ErrorModal from "../../components/ErrorModal.vue";
+
 export default defineComponent({
+  components: { Modal, ErrorModal },
   data() {
     return {
       // Query for searching food
       foodQuery: "",
       // Array to store food data
       foodData: [] as FoodData[],
+      error: false,
+      errorMessage: "",
       // sample searches
       sampleSearches: [
         "Burger King",
@@ -90,6 +103,13 @@ export default defineComponent({
         const response = await axios.get(apiUrl);
         // Update foodData with the response
         this.foodData = response.data.hints;
+        this.error = false;
+        if (response.data.hints.length === 0) {
+          this.error = true;
+          this.errorMessage = `We couldn't find any matches for "${this.foodQuery}" Double check your
+      search for any typos or spelling errors - or try a different search term.`;
+        }
+
         // Save foodData to local storage
         localStorage.setItem("foodData", JSON.stringify(this.foodData));
       } catch (error) {
@@ -105,6 +125,9 @@ export default defineComponent({
     // Method to navigate to food details page
     navigateToFoodDetails(foodId: string) {
       this.$router.push({ name: "FoodDetails", params: { foodId: foodId } });
+    },
+    closeErrorModal() {
+      this.error = false;
     },
   },
   created() {

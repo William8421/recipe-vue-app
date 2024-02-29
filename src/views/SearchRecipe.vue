@@ -51,14 +51,29 @@
         <button class="custom-button" type="submit">Search Recipes</button>
       </form>
     </div>
-
-    <Modal :show="showDietModal" :closeModal="openCloseDietModal">
-      <h2>Diets:</h2>
+    <Modal
+      :show="error"
+      :closeModal="closeErrorModal"
+      header="Error"
+      close="Close"
+    >
+      <ErrorModal :message="errorMessage" />
+    </Modal>
+    <Modal
+      :show="showDietModal"
+      :closeModal="openCloseDietModal"
+      header="Diets"
+      close="Done"
+    >
       <FilterOptions :options="dietOptions" v-model="selectedDiets" />
     </Modal>
 
-    <Modal :show="showAllergiesModal" :closeModal="openCloseAllergiesModal">
-      <h2>Allergies:</h2>
+    <Modal
+      :show="showAllergiesModal"
+      :closeModal="openCloseAllergiesModal"
+      header="Allergies"
+      close="Done"
+    >
       <FilterOptions :options="allergies" v-model="selectedAllergies" />
     </Modal>
 
@@ -80,6 +95,7 @@ import Modal from "../components/searchRecipe/Modal.vue";
 import Recipes from "../components/searchRecipe/Recipe.vue";
 import FilterOptions from "../components/searchRecipe/FilterOptions.vue";
 import FilterDisplay from "../components/searchRecipe/FilterDisplay.vue";
+import ErrorModal from "../components/ErrorModal.vue";
 
 export default defineComponent({
   components: {
@@ -87,6 +103,7 @@ export default defineComponent({
     Recipes,
     FilterOptions,
     FilterDisplay,
+    ErrorModal,
   },
   data() {
     return {
@@ -104,6 +121,8 @@ export default defineComponent({
       showAllergiesModal: false,
       // Store recipes received from API
       recipes: null as Recipe | null,
+      error: false,
+      errorMessage: "",
       // List of allergy options
       allergies: [
         "celery-free",
@@ -193,6 +212,13 @@ export default defineComponent({
 
         // Update recipes with the response
         this.recipes = response.data.hits;
+        this.error = false;
+
+        if (response.data.hits.length === 0) {
+          this.error = true;
+          this.errorMessage = `Sorry, nothing in our recipes database matches "${this.searchQuery}"! Please
+      try again.`;
+        }
       } catch (error) {
         // Log error if there's an issue with the API request
         console.error("Error searching recipes:", error);
@@ -205,6 +231,9 @@ export default defineComponent({
     // Toggle the display of the allergies modal
     openCloseAllergiesModal() {
       this.showAllergiesModal = !this.showAllergiesModal;
+    },
+    closeErrorModal() {
+      this.error = false;
     },
   },
 

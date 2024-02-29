@@ -6,6 +6,10 @@
       width: 80%;
       background-color: $MY_LIGHT_COLOR;
       border-radius: 1rem;
+      h3 {
+        width: 70%;
+        margin: 1rem auto;
+      }
       .recipe-card-body {
         text-align: center;
         h2 {

@@ -29,6 +29,7 @@
   }
   .food-results {
     @include FLEX_COLUMN_CENTER;
+    margin-top: 2rem;
     gap: 2rem;
     .food-card {
       background-color: $MY_LIGHT_COLOR;

@@ -2,7 +2,7 @@
   <div class="nutrition-analysis">
     <h1>Nutrition Analysis</h1>
     <div class="nutrition-analysis-container">
-      <div class="search-table-container">
+      <div>
         <div class="search-block">
           <form @submit.prevent="analyzeNutrition">
             <div>
@@ -23,6 +23,15 @@
             </button>
           </form>
         </div>
+
+        <Modal
+          :show="error"
+          :closeModal="closeErrorModal"
+          header="Error"
+          close="Close"
+        >
+          <ErrorModal :message="errorMessage" />
+        </Modal>
 
         <NutritionTable v-if="nutritionData" :nutritionData="nutritionData" />
       </div>
@@ -61,13 +70,17 @@ import { NutritionData, NutritionMethods } from "../types/Types";
 // components for nutrition analysis
 import NutritionInformation from "../components/nutritionAnalysis/NutritionInformation.vue";
 import NutritionTable from "../components/nutritionAnalysis/NutritionTable.vue";
+import Modal from "../components/searchRecipe/Modal.vue";
+import ErrorModal from "../components/ErrorModal.vue";
 
 export default defineComponent({
-  components: { NutritionTable, NutritionInformation },
+  components: { NutritionTable, NutritionInformation, Modal, ErrorModal },
   data() {
     return {
       foodDescription: "",
       nutritionData: null as NutritionData | null,
+      errorMessage: "",
+      error: false as boolean,
     };
   },
   computed: {
@@ -116,10 +129,18 @@ export default defineComponent({
 
         // Update nutrition data with the response
         this.nutritionData = response.data;
+
+        this.error = false;
       } catch (error) {
         // Log error if there's an issue with the API request
         console.error("Error analyzing nutrition:", error);
+        this.error = true;
+        this.errorMessage =
+          "We cannot calculate the nutrition for some ingredients. Please check the ingredient spelling or if you have entered a quantities for the ingredients.";
       }
+    },
+    closeErrorModal() {
+      this.error = false;
     },
   },
   beforeRouteLeave(to, from, next) {

@@ -42,6 +42,8 @@ export interface NutritionMethods {
   totalDaily: TotalDaily;
   totalNutrients: TotalNutrients;
   modelValue: string[];
+  error: boolean;
+  errorMessage: string;
 }
 export interface NutrientInformation {
   label: string;
