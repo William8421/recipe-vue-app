@@ -111,8 +111,6 @@ export default defineComponent({
           this.errorMessage = `We couldn't find any matches for "${this.foodQuery}" Double check your
       search for any typos or spelling errors - or try a different search term.`;
         }
-        console.log(this.foodData);
-
         // Save foodData to local storage
         localStorage.setItem("foodData", JSON.stringify(this.foodData));
       } catch (error) {
