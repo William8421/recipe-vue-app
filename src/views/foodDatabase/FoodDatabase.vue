@@ -14,7 +14,7 @@
     <Modal
       :show="error"
       :closeModal="closeErrorModal"
-      header="Error"
+      header="Error!"
       close="Close"
     >
       <ErrorModal :message="errorMessage" />
@@ -73,7 +73,9 @@ export default defineComponent({
       foodQuery: "",
       // Array to store food data
       foodData: [] as FoodData[],
+      // Flag to show error
       error: false,
+      // Customized error message
       errorMessage: "",
       // sample searches
       sampleSearches: [
@@ -109,6 +111,7 @@ export default defineComponent({
           this.errorMessage = `We couldn't find any matches for "${this.foodQuery}" Double check your
       search for any typos or spelling errors - or try a different search term.`;
         }
+        console.log(this.foodData);
 
         // Save foodData to local storage
         localStorage.setItem("foodData", JSON.stringify(this.foodData));

@@ -69,19 +69,24 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+// functions from the Vue framework
+import { defineComponent } from "vue";
+// types
+import { Recipe } from "../../types/Types";
+
+export default defineComponent({
   props: ["recipes"],
   methods: {
-    toggleMoreInfo(recipe) {
+    toggleMoreInfo(recipe: Recipe) {
       recipe.showIngredients = !recipe.showIngredients;
     },
-    nutrientValue(recipe, nutrientLabel) {
+    nutrientValue(recipe: Recipe, nutrientLabel: string) {
       const nutrientData = recipe.recipe.digest.find(
         (digestData) => digestData.label === nutrientLabel
       );
       return nutrientData ? Math.round(nutrientData.total) : null;
     },
   },
-};
+});
 </script>

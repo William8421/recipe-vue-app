@@ -54,7 +54,7 @@
     <Modal
       :show="error"
       :closeModal="closeErrorModal"
-      header="Error"
+      header="Error!"
       close="Close"
     >
       <ErrorModal :message="errorMessage" />
@@ -121,7 +121,9 @@ export default defineComponent({
       showAllergiesModal: false,
       // Store recipes received from API
       recipes: null as Recipe | null,
+      // Flag to show error
       error: false,
+      // Customized error message
       errorMessage: "",
       // List of allergy options
       allergies: [

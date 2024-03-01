@@ -25,9 +25,11 @@
 </template>
 
 <script lang="ts">
+// functions from the Vue framework
+import { defineComponent } from "vue";
 // types
 import { NutritionData, NutritionMethods } from "../../types/Types";
-export default {
+export default defineComponent({
   // Declaring component props
   props: {
     nutritionData: Object as () => NutritionData | null,
@@ -49,5 +51,5 @@ export default {
       }));
     },
   },
-};
+});
 </script>

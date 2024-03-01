@@ -54,14 +54,23 @@ export interface NutrientInformation {
 }
 
 // searchRecipe
+
+export interface Digest {
+  daily: number;
+  label: string;
+  total: number;
+}
+
 export interface Recipe {
   calories: number;
-  digest: Nutrient[];
+  digest: Digest[];
   healthLabels: string[];
   image: string;
   ingredientLines: string[];
   label: string;
   yield: number;
+  showIngredients: boolean;
+  recipe: Recipe;
 }
 
 export interface FilterOptionsProps {
@@ -70,10 +79,17 @@ export interface FilterOptionsProps {
 }
 
 // Food Database
+
+export interface FoodDataNutrient {
+  CHOCDF: number;
+  ENERC_KCAL: number;
+  Fat: number;
+  FIBTG: number;
+  PROCNT: number;
+}
 export interface FoodData {
   knownAs: string;
   brand: string;
   image: string;
   ENERC_KCAL: number;
-  nutrients: Nutrient;
 }

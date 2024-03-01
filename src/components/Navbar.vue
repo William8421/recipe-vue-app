@@ -14,33 +14,33 @@
     <nav :class="{ 'menu-open': isMenuOpen }">
       <div class="app-name">Recipe App</div>
       <div class="router-container">
-        <router-link to="/" @click="toggleMenu" class="router-link">
+        <router-link to="/" @click="closeMenu" class="router-link">
           <i class="fa-solid fa-house"></i> Home</router-link
         >
         <router-link
           :to="{ name: 'NutritionAnalysis' }"
-          @click="toggleMenu"
+          @click="closeMenu"
           class="router-link"
         >
           <i class="fa-brands fa-nutritionix"></i> Nutrition Analysis
         </router-link>
         <router-link
           :to="{ name: 'SearchRecipe' }"
-          @click="toggleMenu"
+          @click="closeMenu"
           class="router-link"
         >
           <i class="fa-solid fa-magnifying-glass"></i> Recipe Search
         </router-link>
         <router-link
           :to="{ name: 'FoodDatabase' }"
-          @click="toggleMenu"
+          @click="closeMenu"
           class="router-link"
         >
           <i class="fa-solid fa-database"></i> Food Database
         </router-link>
         <router-link
           :to="{ name: 'About' }"
-          @click="toggleMenu"
+          @click="closeMenu"
           class="router-link"
         >
           <i class="fa-solid fa-circle-info"></i> About
@@ -50,8 +50,10 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
   data() {
     return {
       isMenuOpen: false,
@@ -62,6 +64,10 @@ export default {
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
     },
+    // close burger menu on mobile screen when changing route
+    closeMenu() {
+      this.isMenuOpen = false;
+    },
   },
-};
+});
 </script>

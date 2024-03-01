@@ -27,7 +27,7 @@
         <Modal
           :show="error"
           :closeModal="closeErrorModal"
-          header="Error"
+          header="Error!"
           close="Close"
         >
           <ErrorModal :message="errorMessage" />
@@ -77,10 +77,14 @@ export default defineComponent({
   components: { NutritionTable, NutritionInformation, Modal, ErrorModal },
   data() {
     return {
+      // Food description input
       foodDescription: "",
+      // Stored data received from API
       nutritionData: null as NutritionData | null,
+      // Flag to show error
+      error: false,
+      // Customized error message
       errorMessage: "",
-      error: false as boolean,
     };
   },
   computed: {
